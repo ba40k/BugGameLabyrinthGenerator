@@ -48,5 +48,6 @@ bool Labyrinth::isPassable() const {
                     }
         }
     }
+    spdlog::info("End| Labyrinth:: isPassable() const\n");
     return visited[LABYRINTH_HEIGHT][LABYRINTH_WIDTH];
 }
