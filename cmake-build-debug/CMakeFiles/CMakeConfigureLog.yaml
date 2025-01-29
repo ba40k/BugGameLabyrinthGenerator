@@ -542,3 +542,36 @@ events:
       Running the CXX compiler's linker: "/usr/bin/ld" "-v"
       GNU ld (GNU Binutils for Ubuntu) 2.42
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/snap/clion/296/bin/cmake/linux/x64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/snap/clion/296/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/snap/clion/296/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/snap/clion/296/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "Google_tests/lib/googletest/cmake/internal_utils.cmake:66 (find_package)"
+      - "Google_tests/lib/googletest/CMakeLists.txt:83 (config_compiler_and_linker)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/radamir/CLionProjects/BugGameLabyrinthGenerator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kkDosC"
+      binary: "/home/radamir/CLionProjects/BugGameLabyrinthGenerator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kkDosC"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/radamir/CLionProjects/BugGameLabyrinthGenerator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kkDosC'
+        
+        Run Build Command(s): /snap/clion/296/bin/ninja/linux/x64/ninja -v cmTC_72ba5
+        [1/2] /usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -fdiagnostics-color=always -o CMakeFiles/cmTC_72ba5.dir/src.c.o -c /home/radamir/CLionProjects/BugGameLabyrinthGenerator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-kkDosC/src.c
+        [2/2] : && /usr/bin/cc   CMakeFiles/cmTC_72ba5.dir/src.c.o -o cmTC_72ba5   && :
+        
+      exitCode: 0
+...

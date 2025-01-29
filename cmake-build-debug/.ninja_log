@@ -1,0 +1,5 @@
+# ninja log v6
+2	21	1738168679712524511	CMakeFiles/generator.dir/main.cpp.o	fc8012e2924aa8ea
+2	21	1738168679712524511	CMakeFiles/generator_lib.dir/Generator.cpp.o	cd71edb305f2cf47
+1	7486	1738168679711524513	CMakeFiles/generator_lib.dir/Labyrinth.cpp.o	4ad9c9a1f6edac48
+7487	7606	1738168687197509841	libgenerator_lib.a	9738efa7a16d0e40

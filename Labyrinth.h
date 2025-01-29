@@ -21,17 +21,15 @@ public:
     [[nodiscard]] int score() const; // узнать счет этого лабиринта
     void setCell(int x, int y, char value); // установить указанное значение в выбранной клетке
     Labyrinth getDescendant(Labyrinth &partner); // получить потомка
-    [[nodiscard]] bool isWall(int x, int y) const; // этот метод и метод ниже - проверка на то проходима ли клетка
-    [[nodiscard]] bool isFloor(int x, int y) const;
+    [[nodiscard]] static bool isBelongsToLabyrinth(int x, int y) ; // проверка на то попадает ли точка в лабиринт
+    [[nodiscard]] bool isPassable(int x, int y) const; // этот метод - проверка на то проходима ли клетка
 private:
     std::vector<std::vector<char>> labyrinth;
-    const int LABYRINTH_WIDTH = 30;
-    const int LABYRINTH_HEIGHT = 20;
-    const int FRAME_THICKNESS = 1;
-    [[nodiscard]] bool isBelongsToLabyrinth(int x, int y) const; // проверка на то попадает ли точка в лабиринт
+    static const std::vector<std::pair<int, int>> moves; // задает то, в каких направлениях можно ходить по лабиринту
+    static constexpr int LABYRINTH_WIDTH = 30;
+    static constexpr int LABYRINTH_HEIGHT = 20;
+    static constexpr int  FRAME_THICKNESS = 1;
     ~Labyrinth();
 };
-
-
-
+const std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 #endif //LABYRINTH_H
