@@ -14,16 +14,16 @@ public:
     Labyrinth(Labyrinth &&other) noexcept;
     Labyrinth &operator=(const Labyrinth &other);
     Labyrinth &operator=(Labyrinth &&other) noexcept;
-    const void showLabyrinth(); // отображение лабиринта
-    const bool isPassable(); // проверка лабиринта на проходимость
+    const void showLabyrinth() const; // отображение лабиринта
+    [[nodiscard]] bool isPassable() const; // проверка лабиринта на проходимость
+    [[nodiscard]] int score() const; // узнать счет этого лабиринта
     void setCell(int x, int y, char value); // установить указанное значение в выбранной клетке
+    Labyrinth getDescendant(Labyrinth &partner); // получить потомка 
 private:
     char** labyrinth;
     const int LABYRINTH_WIDTH = 30;
     const int LABYRINTH_HEIGHT = 20;
     const int frameThickness = 1;
-
-
     ~Labyrinth();
 };
 
