@@ -4,6 +4,7 @@
 
 #include "Labyrinth.h"
 #include <queue>
+std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 bool Labyrinth::isBelongsToLabyrinth(const int x, const int y) {
     spdlog::info("Entrypoint| Labyrinth::bool isBelongsToLabyrinth(int x, int y) const\n");
     if (x<0

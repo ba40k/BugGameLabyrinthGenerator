@@ -11,7 +11,7 @@
 
 class Labyrinth {
 public:
-    Labyrinth();  // создаёт случайный лабиринт
+    Labyrinth() = default;  // создаёт случайный лабиринт
     Labyrinth(const Labyrinth &other); // этот конструктор и еще 4 ниже - правило пяти
     Labyrinth(Labyrinth &&other) noexcept;
     Labyrinth &operator=(const Labyrinth &other);
@@ -23,13 +23,13 @@ public:
     Labyrinth getDescendant(Labyrinth &partner); // получить потомка
     [[nodiscard]] static bool isBelongsToLabyrinth(int x, int y) ; // проверка на то попадает ли точка в лабиринт
     [[nodiscard]] bool isPassable(int x, int y) const; // этот метод - проверка на то проходима ли клетка
+    ~Labyrinth() = default;
 private:
     std::vector<std::vector<char>> labyrinth;
-    static const std::vector<std::pair<int, int>> moves; // задает то, в каких направлениях можно ходить по лабиринту
+    static std::vector<std::pair<int, int>> moves; // задает то, в каких направлениях можно ходить по лабиринту
     static constexpr int LABYRINTH_WIDTH = 30;
     static constexpr int LABYRINTH_HEIGHT = 20;
     static constexpr int  FRAME_THICKNESS = 1;
-    ~Labyrinth();
+
 };
-const std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 #endif //LABYRINTH_H
