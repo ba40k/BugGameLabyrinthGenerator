@@ -11,7 +11,7 @@
 
 class Labyrinth {
 public:
-    Labyrinth() = default;  // создаёт случайный лабиринт
+    Labyrinth();  // создаёт случайный(или не очень) лабиринт
     Labyrinth(const Labyrinth &other); // этот конструктор и еще 4 ниже - правило пяти
     Labyrinth(Labyrinth &&other) noexcept;
     Labyrinth &operator=(const Labyrinth &other);
