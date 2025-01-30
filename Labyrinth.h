@@ -23,13 +23,18 @@ public:
     Labyrinth getDescendant(Labyrinth &partner); // получить потомка
     [[nodiscard]] static bool isBelongsToLabyrinth(int x, int y) ; // проверка на то попадает ли точка в лабиринт
     [[nodiscard]] bool isPassable(int x, int y) const; // этот метод - проверка на то проходима ли клетка
+    [[nodiscard]] char getCell(int x, int y) const;
+    [[nodiscard]] char getWallSymbol() const;
+    [[nodiscard]] char getFloorSymbol() const;
     ~Labyrinth() = default;
 private:
-    std::vector<std::vector<char>> labyrinth;
+    std::vector<std::vector<char>> labyrinth;  // лабиринт хранится без рамки
     static std::vector<std::pair<int, int>> moves; // задает то, в каких направлениях можно ходить по лабиринту
     static constexpr int LABYRINTH_WIDTH = 30;
     static constexpr int LABYRINTH_HEIGHT = 20;
     static constexpr int  FRAME_THICKNESS = 1;
+    const char wallSymbol = '#';
+    const char floorSymbol = ' ';
 
 };
 #endif //LABYRINTH_H

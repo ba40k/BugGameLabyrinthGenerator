@@ -25,7 +25,7 @@ TEST_F(TestLabyrinth, HandlesPointAccesability6) {
     ASSERT_EQ(false, Labyrinth::isBelongsToLabyrinth(31,21));
 }
 TEST_F(TestLabyrinth, HandlesPointAccesability7) {
-    ASSERT_EQ(true, Labyrinth::isBelongsToLabyrinth(30,20));
+    ASSERT_EQ(false, Labyrinth::isBelongsToLabyrinth(30,20));
 }
 TEST_F(TestLabyrinth, HandlesPointAccesability8) {
     ASSERT_EQ(true, Labyrinth::isBelongsToLabyrinth(0,0));
