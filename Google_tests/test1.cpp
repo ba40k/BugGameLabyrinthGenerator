@@ -30,3 +30,16 @@ TEST_F(TestLabyrinth, HandlesPointAccesability7) {
 TEST_F(TestLabyrinth, HandlesPointAccesability8) {
     ASSERT_EQ(true, Labyrinth::isBelongsToLabyrinth(0,0));
 }
+TEST_F(TestLabyrinth, HandlesPointPassability1) {
+    ASSERT_EQ(true, labyrinth.isPassable(0,0));
+}
+TEST_F(TestLabyrinth, HandlesPointPassability2) {
+    labyrinth.setCell(1,1,'#');
+    ASSERT_EQ(false, labyrinth.isPassable(1,1));
+}
+TEST_F(TestLabyrinth, HandlesPointPassability3) {
+    EXPECT_THROW(labyrinth.isPassable(-1,0),std::out_of_range);
+}
+TEST_F(TestLabyrinth, HandlesPointPassability4) {
+    EXPECT_THROW(labyrinth.isPassable(30,0),std::out_of_range);
+}

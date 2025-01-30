@@ -34,7 +34,7 @@ private:
     static constexpr int LABYRINTH_HEIGHT = 20;
     static constexpr int  FRAME_THICKNESS = 1;
     const char wallSymbol = '#';
-    const char floorSymbol = ' ';
+    const char floorSymbol = '.';
 
 };
 #endif //LABYRINTH_H
