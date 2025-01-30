@@ -11,7 +11,7 @@ Generator::Generator() : generator(std::random_device{}()), distribution(MIN_RAN
 Generator::Generator(const int seed, const int min, const int max) {
     spdlog::info("Enterpoint| Generator::Generator(int seed, int min, int max)");
     if (min > max) {
-        spdlog::error("Generator::Generator: min > max");
+        spdlog::error("Logic|Generator::Generator: min > max");
         throw std::invalid_argument("min > max");
     }
     MIN_RANDOM_NUMB = min;
@@ -41,11 +41,11 @@ int Generator::getRandomInt(int min, int max) {
     }
     if (min < MAX_RANDOM_NUMB && max > MIN_RANDOM_NUMB) {
         min = MIN_RANDOM_NUMB;
-        spdlog::warn("LOGIC| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN");
+        spdlog::warn("Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN");
     }
     if (max > MAX_RANDOM_NUMB) {
         max = MAX_RANDOM_NUMB;
-        spdlog::warn("LOGIC| Generator::::getRandomInt(int min, int max) -- ARGUMENT MAX BIGGER THEN CLASS MAX");
+        spdlog::warn("Logic| Generator::::getRandomInt(int min, int max) -- ARGUMENT MAX BIGGER THEN CLASS MAX");
     }
     spdlog::info("Enterpoint| Generator::getRandomInt(int min, int max)");
     spdlog::info("End| Generator::getRandomInt(int min, int max)");
@@ -70,4 +70,15 @@ void Generator::setMinRandomNumb(const int min) {
     spdlog::info("Enterpoint| Generator::setMinRandomNumb(int min)");
     MIN_RANDOM_NUMB = min;
     spdlog::info("End| Generator::setMinRandomNumb(int min)");
+}
+std::pair<int, int> Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y) {
+    spdlog::info("Enterpoint| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)");
+    if (LIMIT_X < 0 || LIMIT_Y<0) {
+        spdlog::error("Logic| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y) -- NO NUMBERS IN THAT INTERVAL");
+        throw std::invalid_argument("NO NUMBERS IN THAT INTERVAL");
+    }
+    int x = getRandomInt(0, LIMIT_X);
+    int y = getRandomInt(0, LIMIT_Y);
+    spdlog::info("End| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)");
+    return std::make_pair(x, y);
 }

@@ -12,8 +12,8 @@ public:
     Generator(); // дефолтный генератор, использует стдшный рандом
     Generator(int seed, int min, int max); // устанавливает выбранные рамки и сид
     Generator(const Generator& other) = default; // это и ниже - правило пяти
-    Generator& operator=(const Generator& other) = delete;
-    Generator(Generator&& other) noexcept = delete;
+    Generator& operator=(const Generator& other) = default;
+    Generator(Generator&& other) noexcept = default;
     Generator& operator=(Generator&& other) noexcept = delete ;
     std::pair<int,int> getRandomPoint(int LIMIT_X, int LIMIT_Y); // дает случайную точку с координатами от нуля до заданных пределов
     bool getRandomBool(); //  дает случайный бул
