@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <windows.h>
 #include <omp.h>
+#include <thread>
 using namespace std;
 using ll = int;
 using ld = long double;
@@ -208,62 +209,10 @@ void draw_point (vector<vector<char>> &vec, ll row, ll col)
         vec[row][col] ='#';
     }
 }
-void draw_cross (vector<vector<char>> &vec, ll row, ll col)
-{
-    ll n  = vec.size();
-    ll m = vec[0].size();
-    for (int i=0; i<3; ++i)
-    {
-        for (int j=0; j<3; ++j)
-        {
-            ll new_row = row+i;
-            ll new_col = col+j;
-            if ((i+j)%2==1)
-            {
-                continue;
-            }
-            if (new_col>=m-1 || new_row>=n-1)
-            {
-                continue;
-            }
-            if (vec[new_row][new_col] == '#')
-            {
-                vec[new_row][new_col] = '.';
-            }
-            else
-            {
-                vec[new_row][new_col] ='#';
-            }
-        }
-    }
-}
-void draw_square (vector<vector<char>> &vec, ll row, ll col)
-{
-    ll n  = vec.size();
-    ll m = vec[0].size();
-    for (int i=0; i<2; ++i)
-    {
-        for (int j=0; j<2; ++j)
-        {
-            ll new_row = row+i;
-            ll new_col = col+j;
-            if (new_col>=m-1 || new_row>=n-1)
-            {
-                continue;
-            }
-            if (vec[new_row][new_col] == '#')
-            {
-                vec[new_row][new_col] = '.';
-            }
-            else
-            {
-                vec[new_row][new_col] ='#';
-            }
-        }
-    }
-}
-void solve()
-{
+ll best_score =0;
+vector<vector<char>> best_matrix(21,vector<char>(31,'#'));
+mutex mtx;
+void toParallel(){
     ll n = 21;
     ll m = 31;
     vector<vector<char>> cur_matrix(21,vector<char>(31,'#'));
@@ -274,21 +223,26 @@ void solve()
             cur_matrix[i][j] = '.';
         }
     }
-    ll best_score =0;
-    auto best_matrix = cur_matrix;
     ld T = 100.0;
-    ld coef = 0.99999974;
+    ld coef = 0.85;
     srand(time(0));
     #pragma omp parallel for
     #pragma omp for
+
     for (ll i =0; i<1e8; i++)
     {
-        if (T<0.0001){
-            T = 100;
+        if (T < 0.00001){
+            T=100;
         }
-        gotoxy(0,0);
-        if (i%1000==0)
+
+        if (best_score>1e5)
         {
+            break;
+        }
+
+        mtx.lock();
+        gotoxy(0,0);
+        if (i%1000==0){
             cout<<best_score<<' '<<T<<'\n';
             for (ll i=0; i<n; ++i)
             {
@@ -299,11 +253,8 @@ void solve()
                 cout<<'\n';
             }
         }
-        if (best_score>1e5)
-        {
-            break;
-        }
 
+        mtx.unlock();
         ll row = rand()%n;
         ll col = rand()%m;
         if (row == 0)
@@ -332,61 +283,10 @@ void solve()
         {
             if (cur_score>=best_score)
             {
+                mtx.lock();
                 best_matrix = cur_matrix;
                 best_score = cur_score;
-            }
-            T*=coef;
-            continue;
-        }
-        else
-        {
-            if (rand()%101<T && cur_score>=0)
-            {
-
-            }
-            else
-            {
-                cur_matrix = temp;
-            }
-        }
-
-        temp = cur_matrix;
-        draw_cross(cur_matrix,row,col);
-        temp_score = checker(temp);
-        cur_score = checker(cur_matrix);
-        if (checker(cur_matrix)>=temp_score)
-        {
-            if (cur_score>=best_score)
-            {
-                best_matrix = cur_matrix;
-                best_score = cur_score;
-            }
-            T*=coef;
-            continue;
-        }
-        else
-        {
-            if (rand()%101<T && cur_score>=0)
-            {
-
-            }
-            else
-            {
-                cur_matrix = temp;
-            }
-        }
-
-        temp = cur_matrix;
-        draw_square(cur_matrix,row,col);
-
-        temp_score = checker(temp);
-        cur_score = checker(cur_matrix);
-        if (cur_score>=temp_score)
-        {
-            if (cur_score>=best_score)
-            {
-                best_matrix = cur_matrix;
-                best_score = cur_score;
+                mtx.unlock();
             }
             T*=coef;
             continue;
@@ -408,7 +308,25 @@ void solve()
         T*=coef;
     }
 
-
+}
+void solve()
+{
+    thread t1(toParallel);
+    thread t2(toParallel);
+    thread t3(toParallel);
+    thread t4(toParallel);
+    thread t5(toParallel);
+    thread t6(toParallel);
+    thread t7(toParallel);
+    thread t8(toParallel);
+    t1.join();
+    t2.join();
+    t3.join();
+    t4.join();
+    t5.join();
+    t6.join();
+    t7.join();
+    t8.join();
 }
 int main()
 {
