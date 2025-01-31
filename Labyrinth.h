@@ -13,11 +13,14 @@
 class Labyrinth {
 public:
     Labyrinth();  // создаёт случайный(или не очень) лабиринт
+    explicit Labyrinth(int wallsNumber); //  передаем количество стен, если хотим какое-то конкретное (например 0)
     Labyrinth(const Labyrinth &other); // этот конструктор и еще 3 ниже - правило пяти
     Labyrinth(Labyrinth &&other) noexcept;
     Labyrinth &operator=(const Labyrinth &other);
     Labyrinth &operator=(Labyrinth &&other) noexcept;
+    void clear(); // делает лабиринт пустым
     void showLabyrinth(std::ostream& out) const; // отображение лабиринта
+    void showLabyrinth() const; // шаблонное отображение в консоль
     [[nodiscard]] bool isPassable() const; // проверка лабиринта на проходимость
     [[nodiscard]] int getScore() const; //  здесь мы не вычисляем счет, а возвращаем то, что уже было вычислено
     void setCell(int x, int y, char value); // установить указанное значение в выбранной клетке

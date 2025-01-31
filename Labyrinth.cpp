@@ -7,6 +7,7 @@
 
 #include "Generator.h"
 #include <algorithm>
+#include <iostream>
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
 void Labyrinth::setCell(int x, int y, char ch) {
@@ -35,6 +36,24 @@ Labyrinth::Labyrinth() {
     logger->info("End| Labyrinth::Labyrinth()\n");
 
 }
+Labyrinth::Labyrinth(int wallsNumber) {
+    logger->info("Entrypoint| Labyrinth::Labyrinth(int wallsNumber)\n");
+    labyrinth.resize(LABYRINTH_HEIGHT,std::vector<char>(LABYRINTH_WIDTH,floorSymbol)); // создали пустой лабиринт, без рамки
+    // Изначально мы выбираем максимальное число клеток, которые могут быть сделаны стенами
+    constexpr int MAX_WALLS_NUMBER = 5;
+    Generator generator; // генератор случайных объектов
+    for (int i =0;i<wallsNumber;i++) {
+        auto wall = generator.getRandomPoint(LABYRINTH_WIDTH - 1, LABYRINTH_HEIGHT - 1);
+        if (wall == std::make_pair(0,0)) { // нельзя блокировать точку, где жук изначально
+            continue;
+        }
+        labyrinth[wall.second][wall.first]='#';
+    }
+    score = calculateScore();
+    logger->info("End| Labyrinth::Labyrinth(int wallsNumber)\n");
+
+}
+
 bool Labyrinth::isBelongsToLabyrinth(const int x, const int y) {
     logger->info("Entrypoint| Labyrinth::bool isBelongsToLabyrinth(int x, int y) const\n");
     if (x<0
@@ -95,15 +114,80 @@ char Labyrinth::getCell(int x, int y) const {
     return labyrinth[y][x];
 }
 void Labyrinth::showLabyrinth(std::ostream& out) const {
-    logger->info("Entrypoint| void Labyrinth::showLabyrinth(std::ostream& out) showLabyrinth() const\n");
+    logger->info("Entrypoint| void Labyrinth::showLabyrinth(std::ostream& out)  const\n");
+    for (int i =0;i<FRAME_THICKNESS;i++) {
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            out<<'#';
+        }
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            out<<'#';
+        }
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            out<<'#';
+        }
+        out<<'\n';
+    }
     for (int i =0;i<LABYRINTH_HEIGHT;i++) {
         for (int j=0;j<LABYRINTH_WIDTH;j++) {
             out<<labyrinth[i][j];
         }
         out<<'\n';
     }
-    logger->info("End| void Labyrinth::showLabyrinth(std::ostream& out) showLabyrinth() const\n");
+    for (int i =0;i<FRAME_THICKNESS;i++) {
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            out<<'#';
+        }
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            out<<'#';
+        }
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            out<<'#';
+        }
+        out<<'\n';
+    }
+    logger->info("End| void Labyrinth::showLabyrinth(std::ostream& out) const\n");
 }
+void Labyrinth::showLabyrinth() const {
+    logger->info("Entrypoint| void Labyrinth::showLabyrinth()  const\n");
+    for (int i =0;i<FRAME_THICKNESS;i++) {
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            std::cout<<'#';
+        }
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            std::cout<<'#';
+        }
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            std::cout<<'#';
+        }
+        std::cout<<'\n';
+    }
+    for (int i =0;i<LABYRINTH_HEIGHT;i++) {
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            std::cout<<'#';
+        }
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            std::cout<<labyrinth[i][j];
+        }
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            std::cout<<'#';
+        }
+        std::cout<<'\n';
+    }
+    for (int i =0;i<FRAME_THICKNESS;i++) {
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            std::cout<<'#';
+        }
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            std::cout<<'#';
+        }
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            std::cout<<'#';
+        }
+        std::cout<<'\n';
+    }
+    logger->info("End| void Labyrinth::showLabyrinth()  const\n");
+}
+
 char Labyrinth::getFloorSymbol() const {
      logger->info("Entrypoint| char Labyrinth::getFloorSymbol() const\n");
      logger->info("End| char Labyrinth::getFloorSymbol() const\n");
@@ -114,6 +198,17 @@ char Labyrinth::getWallSymbol() const {
     logger->info("End| char Labyrinth::getWallSymbol() const\n");
     return wallSymbol;
 }
+void Labyrinth::clear() {
+    logger->info("Entrypoint| void Labyrinth::clear() const\n");
+    for (int i =0;i<LABYRINTH_HEIGHT;i++) {
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            setCell(j,i,'.');
+        }
+    }
+    score = 46; // небольшое ускорение, чтобы не обсчитывать это
+    logger->info("End| void Labyrinth::clear() const\n");
+}
+
 int Labyrinth::calculateScore() const {
     //  ужасный код, это мое старое решение и я не хочу его переписывать
     logger->info("Entrypoint| int Labyrinth::score() const\n");
