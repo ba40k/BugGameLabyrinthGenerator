@@ -84,3 +84,25 @@ bool Labyrinth::isPassable() const {
     logger->info("End| Labyrinth:: isPassable() const\n");
     return visited[LABYRINTH_HEIGHT-1][LABYRINTH_WIDTH-1];
 }
+char Labyrinth::getCell(int x, int y) const {
+    if (!isBelongsToLabyrinth(x, y)) {
+        logger->error("Logic| char Labyrinth::getCell(int x, int y) const \n");
+        throw std::out_of_range("Labyrinth::getCell\n");
+    }
+    logger->info("Entrypoint| Labyrinth::getCell(int x, int y) const\n");
+    logger->info("End| Labyrinth::getCell(int x, int y) const\n");
+    return labyrinth[y][x];
+}
+void Labyrinth::showLabyrinth(std::ostream& out) const {
+    logger->info("Entrypoint|void Labyrinth::showLabyrinth(std::ostream& out) showLabyrinth() const\n");
+    for (int i =0;i<LABYRINTH_HEIGHT;i++) {
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            out<<labyrinth[i][j];
+        }
+        out<<'\n';
+    }
+    logger->info("End| void Labyrinth::showLabyrinth(std::ostream& out) showLabyrinth() const\n");
+}
+char Labyrinth::getFloorSymbol() const {
+    
+}
