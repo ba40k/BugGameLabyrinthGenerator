@@ -85,5 +85,6 @@ TEST_F(TestLabyrinth, HandlesLabyrinthScoringTest1) {
 TEST_F(TestLabyrinth, HandlesLabyrinthScoringTest2) {
     labyrinth.clear();
     labyrinth.setCell(28,18,'#');
+    labyrinth.printLabyrinth();
     EXPECT_EQ(-1e9, labyrinth.getScore());
 }

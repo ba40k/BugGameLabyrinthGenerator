@@ -8,6 +8,7 @@
 #include "Generator.h"
 #include <algorithm>
 #include <iostream>
+#include <functional>
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
 void Labyrinth::setCell(int x, int y, char ch) {
@@ -119,81 +120,40 @@ char Labyrinth::getCell(int x, int y) const {
     logger->info("End| Labyrinth::getCell(int x, int y) const\n");
     return labyrinth[y][x];
 }
-void Labyrinth::showLabyrinth(std::ostream& out) const {
+void Labyrinth::printFrameHorizontalPart( std::ostream &out) const {
+    for (int i =0;i<FRAME_THICKNESS;i++) {
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            out<<'#';
+        }
+        for (int j=0;j<LABYRINTH_WIDTH;j++) {
+            out<<'#';
+        }
+        for (int j=0;j<FRAME_THICKNESS;j++) {
+            out<<'#';
+        }
+        out<<'\n';
+    }
+}
+void Labyrinth::printLabyrinth(std::ostream& out) const {
     logger->info("Entrypoint| void Labyrinth::showLabyrinth(std::ostream& out)  const\n");
-    for (int i =0;i<FRAME_THICKNESS;i++) {
+
+    printFrameHorizontalPart();
+    auto printFrameVerticalPartHelper = [&out]() {
         for (int j=0;j<FRAME_THICKNESS;j++) {
             out<<'#';
         }
+    };
+    for (int i=0;i<LABYRINTH_HEIGHT;i++) {
+        printFrameVerticalPartHelper();
         for (int j=0;j<LABYRINTH_WIDTH;j++) {
-            out<<'#';
+            out<<getCell(j,i);
         }
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            out<<'#';
-        }
+        printFrameVerticalPartHelper();
         out<<'\n';
     }
-    for (int i =0;i<LABYRINTH_HEIGHT;i++) {
-        for (int j=0;j<LABYRINTH_WIDTH;j++) {
-            out<<labyrinth[i][j];
-        }
-        out<<'\n';
-    }
-    for (int i =0;i<FRAME_THICKNESS;i++) {
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            out<<'#';
-        }
-        for (int j=0;j<LABYRINTH_WIDTH;j++) {
-            out<<'#';
-        }
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            out<<'#';
-        }
-        out<<'\n';
-    }
+    printFrameHorizontalPart();
     logger->info("End| void Labyrinth::showLabyrinth(std::ostream& out) const\n");
 }
-void Labyrinth::showLabyrinth() const {
-    logger->info("Entrypoint| void Labyrinth::showLabyrinth()  const\n");
-    for (int i =0;i<FRAME_THICKNESS;i++) {
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            std::cout<<'#';
-        }
-        for (int j=0;j<LABYRINTH_WIDTH;j++) {
-            std::cout<<'#';
-        }
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            std::cout<<'#';
-        }
-        std::cout<<'\n';
-    }
-    for (int i =0;i<LABYRINTH_HEIGHT;i++) {
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            std::cout<<'#';
-        }
-        for (int j=0;j<LABYRINTH_WIDTH;j++) {
-            std::cout<<labyrinth[i][j];
-        }
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            std::cout<<'#';
-        }
-        std::cout<<'\n';
-    }
-    for (int i =0;i<FRAME_THICKNESS;i++) {
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            std::cout<<'#';
-        }
-        for (int j=0;j<LABYRINTH_WIDTH;j++) {
-            std::cout<<'#';
-        }
-        for (int j=0;j<FRAME_THICKNESS;j++) {
-            std::cout<<'#';
-        }
-        std::cout<<'\n';
-    }
-    logger->info("End| void Labyrinth::showLabyrinth()  const\n");
-}
-
 char Labyrinth::getFloorSymbol() const {
      logger->info("Entrypoint| char Labyrinth::getFloorSymbol() const\n");
      logger->info("End| char Labyrinth::getFloorSymbol() const\n");

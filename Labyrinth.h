@@ -7,6 +7,7 @@
 #include <vector>
 #include <utility>
 #include <spdlog/spdlog.h>
+#include <iostream>
 #include <spdlog/sinks/rotating_file_sink.h>
 //  Этот класс будет использоваться в генетическом алгоритме, так что не удивляйтесь размножению лабиринтов
 
@@ -19,8 +20,7 @@ public:
     Labyrinth &operator=(const Labyrinth &other);
     Labyrinth &operator=(Labyrinth &&other) noexcept;
     void clear(); // делает лабиринт пустым
-    void showLabyrinth(std::ostream& out) const; // отображение лабиринта
-    void showLabyrinth() const; // шаблонное отображение в консоль
+    void printLabyrinth(std::ostream& out = std::cout) const; // отображение лабиринта
     [[nodiscard]] bool isPassable() const; // проверка лабиринта на проходимость
     [[nodiscard]] int getScore() const; //  здесь мы не вычисляем счет, а возвращаем то, что уже было вычислено
     void setCell(int x, int y, char value); // установить указанное значение в выбранной клетке
@@ -33,6 +33,7 @@ public:
     ~Labyrinth() = default;
 private:
     [[nodiscard]] int calculateScore() const; // вычислить счет этого лабиринта
+    void printFrameHorizontalPart(std::ostream& out = std::cout) const; // вывод горизонтальной части рамки
     void refreshScore();
     int score;
     static const int max_size = 1048576 * 5;
