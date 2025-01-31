@@ -33,6 +33,7 @@ public:
     ~Labyrinth() = default;
 private:
     [[nodiscard]] int calculateScore() const; // вычислить счет этого лабиринта
+    void refreshScore();
     int score;
     static const int max_size = 1048576 * 5;
     static const int max_files = 3;

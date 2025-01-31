@@ -16,7 +16,13 @@ void Labyrinth::setCell(int x, int y, char ch) {
         throw std::out_of_range("Labyrinth::setCell: x is out of range");
     }
     labyrinth[y][x] = ch;
+    refreshScore();
     logger->info("End| void Labyrinth::setCell(int x,int y,char ch);\n");
+}
+void Labyrinth::refreshScore() {
+    logger->info("Entrypoint| void Labyrinth::refreshScore();\n");
+    score = calculateScore();
+    logger->info("End| void Labyrinth::refreshScore();\n");
 }
 Labyrinth::Labyrinth() {
     logger->info("Entrypoint| Labyrinth::Labyrinth()\n");
