@@ -1,0 +1,68 @@
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] Enterpoint| Generator::Generator()
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] End| Generator::Generator()
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] Enterpoint| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:10:52.838] [GeneratorLogger] [info] End| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::Generator()
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::Generator()
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [warning] Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] Enterpoint| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::getRandomInt(int min, int max)
+
+[2025-01-31 20:12:03.675] [GeneratorLogger] [info] End| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)
+

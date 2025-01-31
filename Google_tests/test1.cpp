@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include "../Labyrinth.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 class TestLabyrinth : public testing::Test {
     protected:
     Labyrinth labyrinth;
@@ -51,7 +53,7 @@ TEST_F(TestLabyrinth, HandlesLabyrinthPassability2) {
     labyrinth.setCell(1,0,'#');
     EXPECT_EQ(false, labyrinth.isPassable());
 }
-TEST_F(TestLabyrinth, HandlesLabyrinthPassability3) {
-    labyrinth.setCell(29,19,'#');
+TEST_F(TestLabyrinth, HandlesLabyrinthPassabilitye) {
+    labyrinth.setCell(    29,19,'#');
     EXPECT_EQ(false, labyrinth.isPassable());
 }

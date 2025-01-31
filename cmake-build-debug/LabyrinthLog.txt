@@ -1,0 +1,8 @@
+[2025-01-31 20:12:03.675] [LabyrinthLogger] [info] Entrypoint| Labyrinth::Labyrinth()
+
+[2025-01-31 20:12:03.675] [LabyrinthLogger] [info] End| Labyrinth::Labyrinth()
+
+[2025-01-31 20:12:25.978] [LabyrinthLogger] [info] Entrypoint| Labyrinth::Labyrinth()
+
+[2025-01-31 20:12:25.978] [LabyrinthLogger] [info] End| Labyrinth::Labyrinth()
+

@@ -3,7 +3,8 @@
 //
 #include <gtest/gtest.h>
 #include "../Generator.h"
-
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 class GeneratorTest : public ::testing::Test {
     public:
     Generator defaultGenerator;

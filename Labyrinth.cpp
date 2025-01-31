@@ -6,9 +6,9 @@
 #include <queue>
 
 #include "Generator.h"
-    
+
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
-std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "logs/LabyrinthLog.txt", max_size, max_files);
+std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
 void Labyrinth::setCell(int x, int y, char ch) {
     logger->info("Entrypoint| void Labyrinth::setCell(int x,int y,char ch");
     if (!isBelongsToLabyrinth(x, y)) {
@@ -67,6 +67,7 @@ bool Labyrinth::isPassable() const {
     visited[0][0]=1;
     while (!points.empty()) {
         auto from = points.front(); // запоминаем точку из которой будем сейчас ходить
+        logger->trace("BFS | bool Labyrinth::isPassable() const -- Point is " + std::to_string(from.first) + " " + std::to_string(from.second) + "\n");
         points.pop(); // удаляем её
         for (auto nextMove : Labyrinth::moves) {
             auto to = from;

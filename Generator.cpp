@@ -4,7 +4,7 @@
 
 #include "Generator.h"
 #include "spdlog/spdlog.h"
-std::shared_ptr<spdlog::logger> Generator::logger = spdlog::rotating_logger_mt("GeneratorLogger", "logs/GeneratorLog.txt", max_size, max_files);
+std::shared_ptr<spdlog::logger> Generator::logger = spdlog::rotating_logger_mt("GeneratorLogger", "../../logs/GeneratorLog.txt", max_size, max_files);
 Generator::Generator() : generator(std::random_device{}()), distribution(MIN_RANDOM_NUMB, MAX_RANDOM_NUMB) {
     logger->info("Enterpoint| Generator::Generator()\n");
     logger->info("End| Generator::Generator()\n");
@@ -40,7 +40,7 @@ int Generator::getRandomInt(int min, int max) {
         logger->error("Enterpoint| Generator::getRandomInt(int min, int max) -- CAN'T GENERATE NUMBER IN THAT INTERVAL\n");
         throw std::invalid_argument("NO NUMBERS IN THAT INTERVAL");
     }
-    if (min < MAX_RANDOM_NUMB && max > MIN_RANDOM_NUMB) {
+    if (min < MIN_RANDOM_NUMB) {
         min = MIN_RANDOM_NUMB;
         logger->warn("Logic| Generator::getRandomInt(int min, int max) -- ARGUMENT MIN LESS THEN CLASS MIN\n");
     }
