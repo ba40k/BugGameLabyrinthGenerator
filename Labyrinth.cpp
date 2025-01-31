@@ -31,6 +31,7 @@ Labyrinth::Labyrinth() {
         }
         labyrinth[wall.second][wall.first]='#';
     }
+    score = calculateScore();
     logger->info("End| Labyrinth::Labyrinth()\n");
 
 }
@@ -113,7 +114,7 @@ char Labyrinth::getWallSymbol() const {
     logger->info("End| char Labyrinth::getWallSymbol() const\n");
     return wallSymbol;
 }
-int Labyrinth::score() const {
+int Labyrinth::calculateScore() const {
     //  ужасный код, это мое старое решение и я не хочу его переписывать
     logger->info("Entrypoint| int Labyrinth::score() const\n");
     if (!isPassable()) // если лабиринт непроходим, то мы это обозначаем бесконечно малым скорингом
@@ -158,7 +159,7 @@ int Labyrinth::score() const {
         {
             int nextI = i + el.first;
             int nextJ = j + el.second;
-            if (isPassable(nextJ, nextI))
+            if (isBelongsToLabyrinth(nextJ,nextI) && isPassable(nextJ, nextI))
             {
                 next[ind] = matrix[nextI][nextJ];
                 vals[ind] = matrix[nextI][nextJ];
@@ -248,6 +249,11 @@ int Labyrinth::score() const {
         }
         break;
     }
-
+    logger->info("End| int Labyrinth::score() const\n");
+    return score;
+}
+int Labyrinth::getScore() const {
+    logger->info("EntryPoint| Labyrinth::getScore()");
+    logger->info("End| Labyrinth::getScore()");
     return score;
 }

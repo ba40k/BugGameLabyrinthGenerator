@@ -19,7 +19,7 @@ public:
     Labyrinth &operator=(Labyrinth &&other) noexcept;
     void showLabyrinth(std::ostream& out) const; // отображение лабиринта
     [[nodiscard]] bool isPassable() const; // проверка лабиринта на проходимость
-    [[nodiscard]] int score() const; // узнать счет этого лабиринта
+    [[nodiscard]] int getScore() const; //  здесь мы не вычисляем счет, а возвращаем то, что уже было вычислено
     void setCell(int x, int y, char value); // установить указанное значение в выбранной клетке
     Labyrinth getDescendant(Labyrinth &partner); // получить потомка
     [[nodiscard]] static bool isBelongsToLabyrinth(int x, int y) ; // проверка на то попадает ли точка в лабиринт
@@ -29,13 +29,15 @@ public:
     [[nodiscard]] char getFloorSymbol() const; // узнать символ пола
     ~Labyrinth() = default;
 private:
+    [[nodiscard]] int calculateScore() const; // вычислить счет этого лабиринта
+    int score;
     static const int max_size = 1048576 * 5;
     static const int max_files = 3;
     static std::shared_ptr<spdlog::logger> logger;
     std::vector<std::vector<char>> labyrinth;  // лабиринт хранится без рамки
     static std::vector<std::pair<int, int>> moves; // задает то, в каких направлениях можно ходить по лабиринту
-    static constexpr int LABYRINTH_WIDTH = 30;
-    static constexpr int LABYRINTH_HEIGHT = 20;
+    static constexpr int LABYRINTH_WIDTH = 29;
+    static constexpr int LABYRINTH_HEIGHT = 19;
     static constexpr int  FRAME_THICKNESS = 1;
     const char wallSymbol = '#';
     const char floorSymbol = '.';

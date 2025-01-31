@@ -54,15 +54,18 @@ TEST_F(TestLabyrinth, HandlesLabyrinthPassability2) {
     EXPECT_EQ(false, labyrinth.isPassable());
 }
 TEST_F(TestLabyrinth, HandlesLabyrinthPassability3) {
-    labyrinth.setCell(    29,19,'#');
+    labyrinth.setCell(    28,18,'#');
     EXPECT_EQ(false, labyrinth.isPassable());
 }
 TEST_F(TestLabyrinth, HandlesLabyrinthPassAbility4) {
-    labyrinth.setCell(29,18,'#');
+    labyrinth.setCell(28,17,'#');
     EXPECT_EQ(true, labyrinth.isPassable());
 }
 TEST_F(TestLabyrinth, HandlesLabyrinthPassability5) {
     labyrinth.setCell(0,1,'#');
     labyrinth.setCell(1,0,'#');
     EXPECT_EQ(false, labyrinth.isPassable());
+}
+TEST_F(TestLabyrinth, HandlesLabyrinthScoringTest) {
+    EXPECT_EQ(46, labyrinth.getScore());
 }
