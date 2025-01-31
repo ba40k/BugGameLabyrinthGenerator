@@ -74,8 +74,8 @@ bool Labyrinth::isPassable() const {
             to.first += nextMove.first;
             to.second += nextMove.second;
             if (isBelongsToLabyrinth(to.first, to.second)
-                &&  isPassable(to.first, to.second
-                    && !visited[to.first][to.second])) {
+                &&  isPassable(to.first, to.second)
+                    && !visited[to.second][to.first]) {
                 points.emplace(to.first, to.second);
                 visited[to.second][to.first] = 1;
                     }
