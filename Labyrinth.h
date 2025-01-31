@@ -13,7 +13,7 @@
 class Labyrinth {
 public:
     Labyrinth();  // создаёт случайный(или не очень) лабиринт
-    Labyrinth(const Labyrinth &other); // этот конструктор и еще 4 ниже - правило пяти
+    Labyrinth(const Labyrinth &other); // этот конструктор и еще 3 ниже - правило пяти
     Labyrinth(Labyrinth &&other) noexcept;
     Labyrinth &operator=(const Labyrinth &other);
     Labyrinth &operator=(Labyrinth &&other) noexcept;
@@ -24,9 +24,9 @@ public:
     Labyrinth getDescendant(Labyrinth &partner); // получить потомка
     [[nodiscard]] static bool isBelongsToLabyrinth(int x, int y) ; // проверка на то попадает ли точка в лабиринт
     [[nodiscard]] bool isPassable(int x, int y) const; // этот метод - проверка на то проходима ли клетка
-    [[nodiscard]] char getCell(int x, int y) const;
-    [[nodiscard]] char getWallSymbol() const;
-    [[nodiscard]] char getFloorSymbol() const;
+    [[nodiscard]] char getCell(int x, int y) const; // получить то, что хранится в клетке
+    [[nodiscard]] char getWallSymbol() const; // узнать символ стены
+    [[nodiscard]] char getFloorSymbol() const; // узнать символ пола
     ~Labyrinth() = default;
 private:
     static const int max_size = 1048576 * 5;
@@ -39,6 +39,7 @@ private:
     static constexpr int  FRAME_THICKNESS = 1;
     const char wallSymbol = '#';
     const char floorSymbol = '.';
-
+    const int acceptableScore = 1e5; // достаточный для меня счет
+    const int inf = 1e9;
 };
 #endif //LABYRINTH_H

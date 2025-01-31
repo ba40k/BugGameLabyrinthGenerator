@@ -6,7 +6,7 @@
 #include <queue>
 
 #include "Generator.h"
-
+#include <algorithm>
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
 void Labyrinth::setCell(int x, int y, char ch) {
@@ -94,7 +94,7 @@ char Labyrinth::getCell(int x, int y) const {
     return labyrinth[y][x];
 }
 void Labyrinth::showLabyrinth(std::ostream& out) const {
-    logger->info("Entrypoint|void Labyrinth::showLabyrinth(std::ostream& out) showLabyrinth() const\n");
+    logger->info("Entrypoint| void Labyrinth::showLabyrinth(std::ostream& out) showLabyrinth() const\n");
     for (int i =0;i<LABYRINTH_HEIGHT;i++) {
         for (int j=0;j<LABYRINTH_WIDTH;j++) {
             out<<labyrinth[i][j];
@@ -104,5 +104,150 @@ void Labyrinth::showLabyrinth(std::ostream& out) const {
     logger->info("End| void Labyrinth::showLabyrinth(std::ostream& out) showLabyrinth() const\n");
 }
 char Labyrinth::getFloorSymbol() const {
-    
+     logger->info("Entrypoint| char Labyrinth::getFloorSymbol() const\n");
+     logger->info("End| char Labyrinth::getFloorSymbol() const\n");
+     return floorSymbol;
+}
+char Labyrinth::getWallSymbol() const {
+    logger->info("Entrypoint| char Labyrinth::getWallSymbol() const\n");
+    logger->info("End| char Labyrinth::getWallSymbol() const\n");
+    return wallSymbol;
+}
+int Labyrinth::score() const {
+    //  ужасный код, это мое старое решение и я не хочу его переписывать
+    logger->info("Entrypoint| int Labyrinth::score() const\n");
+    if (!isPassable()) // если лабиринт непроходим, то мы это обозначаем бесконечно малым скорингом
+    {
+        logger->info("End| int Labyrinth::score() const\n");
+        return -inf;
+    }
+    int matrix[LABYRINTH_HEIGHT][LABYRINTH_WIDTH];
+    int score = - inf;
+    for (int i=0; i<LABYRINTH_HEIGHT; ++i)
+    {
+        for (int j=0; j<LABYRINTH_WIDTH; ++j)
+        {
+            matrix[i][j] = 0;
+        }
+    }
+
+    matrix[0][0] = 1;
+    int i= 0;
+    int j = 0;
+    int orient = 2;
+    int step =-1;
+    std::vector<int> next(4,inf);
+    std::vector<int> vals(4,inf);
+    while (true)
+    {
+        step++;
+        if (score>=acceptableScore)
+        {
+            // пока что для меня достаточно такого результата для лабиринта, поэтому чтобы не тормозить программу по его достижению завершаемся
+            return inf;
+        }
+        if (i == LABYRINTH_HEIGHT-1 && j == LABYRINTH_WIDTH-1)
+        {
+            score = step;
+            break;
+        }
+        std::fill(next.begin(), next.end(), inf);
+        std::fill(vals.begin(), vals.end(), inf);
+        int ind =0;
+        for (auto el : moves)
+        {
+            int nextI = i + el.first;
+            int nextJ = j + el.second;
+            if (isPassable(nextJ, nextI))
+            {
+                next[ind] = matrix[nextI][nextJ];
+                vals[ind] = matrix[nextI][nextJ];
+            }
+            ind++;
+        }
+        std::sort(vals.begin(),vals.end());
+        if (next[0]<next[1] && next[0]<next[2] && next[0]<next[3])
+        {
+            auto el = moves[0];
+            orient = 0;
+            matrix[i+el.first][j+el.second]++;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[1]<next[0] && next[1]<next[2] && next[1]<next[3])
+        {
+            auto el = moves[1];
+            orient = 1;
+            matrix[i+el.first][j+el.second]++;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[2]<next[0] && next[2]<next[1] && next[2]<next[3])
+        {
+            auto el = moves[2];
+            matrix[i+el.first][j+el.second]++;
+            orient = 2;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[3]<next[0] && next[3]<next[1] && next[3]<next[2])
+        {
+            auto el = moves[3];
+            matrix[i+el.first][j+el.second]++;
+            orient = 3;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[orient]!=1e9 && next[orient] == vals[0])
+        {
+            auto el = moves[orient];
+            matrix[i+el.first][j+el.second]++;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[0]!=1e9 && next[0] == vals[0])
+        {
+            auto el = moves[0];
+            orient = 0;
+            matrix[i+el.first][j+el.second]++;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[1]!=1e9 && next[1] == vals[0])
+        {
+            auto el = moves[1];
+            orient = 1;
+            matrix[i+el.first][j+el.second]++;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[2]!=1e9 && next[2] == vals[0])
+        {
+            auto el = moves[2];
+            orient = 2;
+            matrix[i+el.first][j+el.second]++;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        if (next[3]!=1e9 &&  next[3] == vals[0])
+        {
+            auto el = moves[3];
+            orient = 3;
+            matrix[i+el.first][j+el.second]++;
+            i+=el.first;
+            j+=el.second;
+            continue;
+        }
+        break;
+    }
+
+    return score;
 }
