@@ -7,6 +7,7 @@
 
 #include <utility>
 #include <random>
+#include<spdlog/sinks/rotating_file_sink.h>
 class Generator {
 public:
     Generator(); // дефолтный генератор, использует стдшный рандом
@@ -25,6 +26,9 @@ public:
     [[nodiscard]] int getMaxRandomNumb() const;// узнать верхнюю границу рандома
     ~Generator() = default;
 private:
+    static const int max_size = 1048576 * 5;
+    static const int max_files = 3;
+    static std::shared_ptr<spdlog::logger> logger;
     int MIN_RANDOM_NUMB = 0;
     int MAX_RANDOM_NUMB = 2000000000;
     // Создание объекта генератора случайных чисел на основе mt19937

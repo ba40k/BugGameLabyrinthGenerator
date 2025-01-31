@@ -7,6 +7,7 @@
 #include <vector>
 #include <utility>
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 //  Этот класс будет использоваться в генетическом алгоритме, так что не удивляйтесь размножению лабиринтов
 
 class Labyrinth {
@@ -28,6 +29,9 @@ public:
     [[nodiscard]] char getFloorSymbol() const;
     ~Labyrinth() = default;
 private:
+    static const int max_size = 1048576 * 5;
+    static const int max_files = 3;
+    static std::shared_ptr<spdlog::logger> logger;
     std::vector<std::vector<char>> labyrinth;  // лабиринт хранится без рамки
     static std::vector<std::pair<int, int>> moves; // задает то, в каких направлениях можно ходить по лабиринту
     static constexpr int LABYRINTH_WIDTH = 30;

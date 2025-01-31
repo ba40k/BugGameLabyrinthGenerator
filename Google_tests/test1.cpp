@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
-
 #include "../Labyrinth.h"
-
 class TestLabyrinth : public testing::Test {
     protected:
     Labyrinth labyrinth;
@@ -42,4 +40,18 @@ TEST_F(TestLabyrinth, HandlesPointPassability3) {
 }
 TEST_F(TestLabyrinth, HandlesPointPassability4) {
     EXPECT_THROW(labyrinth.isPassable(30,0),std::out_of_range);
+}
+TEST_F(TestLabyrinth, HandlesLabyrinthPassability1) {
+    labyrinth.setCell(0,0,'#');
+    EXPECT_EQ(false, labyrinth.isPassable());
+}
+TEST_F(TestLabyrinth, HandlesLabyrinthPassability2) {
+    labyrinth.setCell(1,1,'#');
+    labyrinth.setCell(0,1,'#');
+    labyrinth.setCell(1,0,'#');
+    EXPECT_EQ(false, labyrinth.isPassable());
+}
+TEST_F(TestLabyrinth, HandlesLabyrinthPassability3) {
+    labyrinth.setCell(29,19,'#');
+    EXPECT_EQ(false, labyrinth.isPassable());
 }

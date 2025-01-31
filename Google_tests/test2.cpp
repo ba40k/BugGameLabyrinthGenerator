@@ -2,7 +2,6 @@
 // Created by radamir on 30.01.25.
 //
 #include <gtest/gtest.h>
-
 #include "../Generator.h"
 
 class GeneratorTest : public ::testing::Test {
