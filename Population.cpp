@@ -10,6 +10,12 @@ void Population::refreshPopulationSize() {
     populationSize = population.size();
     logger->info("End| Population::refreshPopulationSize");
 }
+int Population::getPopulationSize() {
+    logger->info("Entrypoint| Population::getPopulationSize");
+    logger->info("End| Population::getPopulationSize");
+    return populationSize;
+}
+
 std::set<Labyrinth>::iterator Population::getRandomLabyrinth() {
         logger->info("Entrypoint| Population::getRandomLabyrinth");
         auto it = population.begin();
@@ -63,8 +69,6 @@ void Population::setMaxPopulationSize(int _populationSize) {
     refreshPopulationSize();
     logger->info("End| Population::setMaxPopulationSize");
 }
-
-
 void Population::refreshGeneration() {
     logger->info("Entrypoint| Population::refreshGeneration");
     Generator generator;

@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <iostream>
 #include <functional>
-#include <bits/fs_path.h>
+
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
 void Labyrinth::setCell(int x, int y, char ch) {

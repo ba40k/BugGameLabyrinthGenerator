@@ -15,7 +15,8 @@ public:
     void refreshGeneration(); // создает новые лабиринты и удаляет худшие
     void mutate();// вызывает мутации у членов популяции
     void setMaxPopulationSize(int _populationSize); // установить максимальный размер популяции
-    std::set<Labyrinth>::iterator getRandomLabyrinth(); // получить случайный член популяции
+    int getPopulationSize(); // возвращает размер популяции
+    std::multiset<Labyrinth>::iterator getRandomLabyrinth(); // получить случайный член популяции
     ~Population() = default;
 private:
     static const int max_size = 1048576 * 5;
@@ -25,7 +26,7 @@ private:
     void shrinkPopulation();
     int maxPopulationSize = 1000;
     static const int initialPopulationSize = 100;
-    std::set<Labyrinth> population;
+    std::multiset<Labyrinth> population;
     int populationSize;
 };
 

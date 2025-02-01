@@ -212,6 +212,13 @@ build Google_tests/CMakeFiles/Google_Tests_run.dir/test2.cpp.o: CXX_COMPILER__Go
   OBJECT_DIR = Google_tests/CMakeFiles/Google_Tests_run.dir
   OBJECT_FILE_DIR = Google_tests/CMakeFiles/Google_Tests_run.dir
 
+build Google_tests/CMakeFiles/Google_Tests_run.dir/test3.cpp.o: CXX_COMPILER__Google_Tests_run_unscanned_Debug /home/radamir/CLionProjects/BugGameLabyrinthGenerator/Google_tests/test3.cpp || cmake_object_order_depends_target_Google_Tests_run
+  DEP_FILE = Google_tests/CMakeFiles/Google_Tests_run.dir/test3.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/radamir/CLionProjects/BugGameLabyrinthGenerator/spdlog/include -isystem /home/radamir/CLionProjects/BugGameLabyrinthGenerator/Google_tests/lib/googletest/include -isystem /home/radamir/CLionProjects/BugGameLabyrinthGenerator/Google_tests/lib/googletest
+  OBJECT_DIR = Google_tests/CMakeFiles/Google_Tests_run.dir
+  OBJECT_FILE_DIR = Google_tests/CMakeFiles/Google_Tests_run.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Google_Tests_run
@@ -220,7 +227,7 @@ build Google_tests/CMakeFiles/Google_Tests_run.dir/test2.cpp.o: CXX_COMPILER__Go
 #############################################
 # Link the executable Google_tests/Google_Tests_run
 
-build Google_tests/Google_Tests_run: CXX_EXECUTABLE_LINKER__Google_Tests_run_Debug Google_tests/CMakeFiles/Google_Tests_run.dir/test1.cpp.o Google_tests/CMakeFiles/Google_Tests_run.dir/test2.cpp.o | libgenerator_lib.a lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a libgenerator_lib.a
+build Google_tests/Google_Tests_run: CXX_EXECUTABLE_LINKER__Google_Tests_run_Debug Google_tests/CMakeFiles/Google_Tests_run.dir/test1.cpp.o Google_tests/CMakeFiles/Google_Tests_run.dir/test2.cpp.o Google_tests/CMakeFiles/Google_Tests_run.dir/test3.cpp.o | libgenerator_lib.a lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a libgenerator_lib.a
   FLAGS = -g
   LINK_LIBRARIES = libgenerator_lib.a  lib/libgtest.a  lib/libgtest_main.a  lib/libgtest.a
   OBJECT_DIR = Google_tests/CMakeFiles/Google_Tests_run.dir
