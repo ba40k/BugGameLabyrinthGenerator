@@ -14,7 +14,7 @@ void task(int number) {
     std::ofstream out(fileName);
     Population<Labyrinth> pop(20);
     Labyrinth bestLabyrinth;
-    int iterations = 50;
+    int iterations = 500;
     while (iterations--){
         out.seekp(0);
         pop.mutate();
@@ -36,10 +36,14 @@ int main() {
     std::thread task4(task, 4);
     std::thread task5(task, 5);
     std::thread task6(task, 6);
+    std::thread task7(task, 7);
+    std::thread task8(task, 8);
     task1.join();
     task2.join();
     task3.join();
     task4.join();
     task5.join();
     task6.join();
+    task7.join();
+    task8.join();
 }

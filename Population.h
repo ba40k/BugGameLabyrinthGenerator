@@ -25,8 +25,8 @@ private:
     static std::shared_ptr<spdlog::logger> logger;
     void refreshPopulationSize();
     void shrinkPopulation();
-    int maxPopulationSize = 1000;
-    static const int initialPopulationSize = 100;
+    int maxPopulationSize = 100;
+    static const int initialPopulationSize = 50;
     std::multiset<PopulationMember> population;
     int populationSize;
 };
@@ -63,10 +63,11 @@ void Population<PopulationMember>::mutate() {
         std::multiset<Labyrinth>::iterator labyrinth = getRandomLabyrinth();
         auto newLabyrinth = *labyrinth;
         newLabyrinth.mutation();
-        population.erase(labyrinth);
+        //population.erase(labyrinth);
         population.insert(newLabyrinth);
     }
     logger->info("End| Population::mutate");
+    shrinkPopulation();
     refreshPopulationSize();
 }
 template<class PopulationMember>

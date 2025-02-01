@@ -4,8 +4,9 @@
 
 #include "Generator.h"
 #include "spdlog/spdlog.h"
+#include <chrono>
 std::shared_ptr<spdlog::logger> Generator::logger = spdlog::rotating_logger_mt("GeneratorLogger", "../../logs/GeneratorLog.txt", max_size, max_files);
-Generator::Generator() : generator(std::random_device{}()), distribution(MIN_RANDOM_NUMB, MAX_RANDOM_NUMB) {
+Generator::Generator() : generator(std::chrono::steady_clock::now().time_since_epoch().count()), distribution(MIN_RANDOM_NUMB, MAX_RANDOM_NUMB) {
     logger->info("Enterpoint| Generator::Generator()\n");
     logger->info("End| Generator::Generator()\n");
 }
