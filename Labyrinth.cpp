@@ -138,7 +138,7 @@ void Labyrinth::printFrameHorizontalPart( std::ostream &out) const {
 void Labyrinth::printLabyrinth(std::ostream& out) const {
     logger->info("Entrypoint| void Labyrinth::showLabyrinth(std::ostream& out)  const\n");
 
-    printFrameHorizontalPart();
+    printFrameHorizontalPart(out);
     auto printFrameVerticalPartHelper = [&out]() {
         for (int j=0;j<FRAME_THICKNESS;j++) {
             out<<'#';
@@ -152,7 +152,7 @@ void Labyrinth::printLabyrinth(std::ostream& out) const {
         printFrameVerticalPartHelper();
         out<<'\n';
     }
-    printFrameHorizontalPart();
+    printFrameHorizontalPart(out);
     logger->info("End| void Labyrinth::showLabyrinth(std::ostream& out) const\n");
 }
 char Labyrinth::getFloorSymbol() const {
@@ -337,7 +337,7 @@ Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     Generator generator;
     int numberOfMutations = generator.getRandomInt(0,maxNumberOfMutations);
     for (int i =0;i<numberOfMutations;i++) {
-        auto randomPoint = generator.getRandomPoint(LABYRINTH_WIDTH,LABYRINTH_HEIGHT);
+        auto randomPoint = generator.getRandomPoint(LABYRINTH_WIDTH-1,LABYRINTH_HEIGHT-1);
         descendant.setCell(randomPoint.first,randomPoint.second,partner.getCell(randomPoint.first,randomPoint.second));
     }
     logger->info("End| Labyrinth::getDescendant()\n");
@@ -351,7 +351,7 @@ bool Labyrinth::operator<(const Labyrinth &other) const {
 void Labyrinth::mutation() {
     logger->info("EntryPoint| Labyrinth::mutation()\n");
     Generator generator;
-    auto point = generator.getRandomPoint(LABYRINTH_WIDTH,LABYRINTH_HEIGHT);
+    auto point = generator.getRandomPoint(LABYRINTH_WIDTH-1,LABYRINTH_HEIGHT-1);
     bool randomBool = generator.getRandomBool();
     (randomBool==1)?setCell(point.first,point.second,'#'):setCell(point.first,point.second,'.');
     logger->info("End| Labyrinth::mutation()\n");
