@@ -14,7 +14,7 @@ public:
     Labyrinth getBestLabyrinth() const; // дает лучший лабиринт
     void refreshGeneration(); // создает новые лабиринты и удаляет худшие
     void mutate();// вызывает мутации у членов популяции
-    void setMaxPopulationSize(int _populationSize);
+    void setMaxPopulationSize(int _populationSize); // установить максимальный размер популяции
     std::set<Labyrinth>::iterator getRandomLabyrinth(); // получить случайный член популяции
     ~Population() = default;
 private:
