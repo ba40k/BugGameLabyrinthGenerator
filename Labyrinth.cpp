@@ -330,6 +330,17 @@ Labyrinth &Labyrinth::operator=(const Labyrinth &other) {
     logger->info("End| Labyrinth::operator=()\n");
     return *this;
 }
+Labyrinth &Labyrinth::operator=(Labyrinth &&other) noexcept {
+    logger->info("EnterPoint| Labyrinth::operator=()\n");
+    if (this == &other) {
+        logger->info("End| Labyrinth::operator=()\n");
+        return *this;
+    }
+    score = other.score;
+    labyrinth = other.labyrinth;
+    logger->info("End| Labyrinth::operator=()\n");
+    return *this;
+}
 Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     logger->info("EntryPoint| Labyrinth::getDescendant()\n");
     Labyrinth descendant = *this;

@@ -18,7 +18,7 @@ public:
     Labyrinth(const Labyrinth &other) = default; // этот конструктор и еще 3 ниже - правило пяти
     Labyrinth(Labyrinth &&other) noexcept = default;
     Labyrinth &operator=(const Labyrinth &other);
-    Labyrinth &operator=(Labyrinth &&other) noexcept = delete;
+    Labyrinth &operator=(Labyrinth &&other) noexcept;
     bool operator<(const Labyrinth &other) const; // сравнивает лабиринты по их скору, нужно для хранения в std::set
     void clear(); // делает лабиринт пустым
     void printLabyrinth(std::ostream& out = std::cout) const; // отображение лабиринта

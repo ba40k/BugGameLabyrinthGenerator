@@ -10,17 +10,21 @@
 #include <string>
 #include <thread>
 void task(int number) {
-    std::string fileName = "output" + std::to_string(number) + ".txt";
+    std::string fileName = "../res/output" + std::to_string(number) + ".txt";
     std::ofstream out(fileName);
     Population<Labyrinth> pop(20);
+    Labyrinth bestLabyrinth;
     int iterations = 50;
     while (iterations--){
         out.seekp(0);
         pop.mutate();
         pop.refreshGeneration();
         pop.mutate();
-        out<<pop.getBestLabyrinth().getScore()<<'\n';
-        pop.getBestLabyrinth().printLabyrinth(out);
+        if (pop.getBestLabyrinth().getScore() > bestLabyrinth.getScore()) {
+            bestLabyrinth = pop.getBestLabyrinth();
+        }
+        out<<bestLabyrinth.getScore()<<'\n';
+        bestLabyrinth.printLabyrinth(out);
         out<<'\n';
         out.flush();
     }
