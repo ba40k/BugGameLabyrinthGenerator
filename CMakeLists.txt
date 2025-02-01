@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(generator main.cpp)
 include_directories(spdlog/include)
-add_library(generator_lib STATIC Labyrinth.cpp Generator.cpp)
+add_library(generator_lib STATIC Labyrinth.cpp Generator.cpp Population.cpp)
 add_subdirectory(Google_tests)
 target_link_libraries(generator generator_lib)
 

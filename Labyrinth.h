@@ -15,10 +15,11 @@ class Labyrinth {
 public:
     Labyrinth();  // создаёт случайный(или не очень) лабиринт
     explicit Labyrinth(int wallsNumber); //  передаем количество стен, если хотим какое-то конкретное (например 0)
-    Labyrinth(const Labyrinth &other); // этот конструктор и еще 3 ниже - правило пяти
-    Labyrinth(Labyrinth &&other) noexcept;
+    Labyrinth(const Labyrinth &other) = default; // этот конструктор и еще 3 ниже - правило пяти
+    Labyrinth(Labyrinth &&other) noexcept = default;
     Labyrinth &operator=(const Labyrinth &other);
-    Labyrinth &operator=(Labyrinth &&other) noexcept;
+    Labyrinth &operator=(Labyrinth &&other) noexcept = delete;
+    bool operator<(const Labyrinth &other) const; // сравнивает лабиринты по их скору, нужно для хранения в std::set
     void clear(); // делает лабиринт пустым
     void printLabyrinth(std::ostream& out = std::cout) const; // отображение лабиринта
     [[nodiscard]] bool isPassable() const; // проверка лабиринта на проходимость

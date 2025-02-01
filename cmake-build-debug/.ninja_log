@@ -1,23 +1,13 @@
 # ninja log v6
 2	6905	1738342558458830495	Google_tests/CMakeFiles/Google_Tests_run.dir/test2.cpp.o	96ed134df94fb2
-8286	8463	1738354441166407065	libgenerator_lib.a	9738efa7a16d0e40
+8348	8540	1738354807102887852	libgenerator_lib.a	9738efa7a16d0e40
 3	6378	1738342229119124408	CMakeFiles/generator.dir/main.cpp.o	fc8012e2924aa8ea
 4	1501	1738168788877300567	Google_tests/lib/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	a260b6308ae71c4
 3	322	1738343677293396257	generator	7cbae613af1e5bcc
-3	7724	1738354432883191857	Google_tests/CMakeFiles/Google_Tests_run.dir/test1.cpp.o	49b780bae5c956ac
 4	8589	1738343884066216926	CMakeFiles/generator_lib.dir/Generator.cpp.o	cd71edb305f2cf47
-3	8286	1738354432883191857	CMakeFiles/generator_lib.dir/Labyrinth.cpp.o	4ad9c9a1f6edac48
-8463	8871	1738354441343433614	Google_tests/Google_Tests_run	1bbbece3236554d2
+3	7877	1738354798757995186	Google_tests/CMakeFiles/Google_Tests_run.dir/test1.cpp.o	49b780bae5c956ac
+2	8348	1738354798756995081	CMakeFiles/generator_lib.dir/Labyrinth.cpp.o	4ad9c9a1f6edac48
+8540	8953	1738354807294908680	Google_tests/Google_Tests_run	1bbbece3236554d2
 3	65	1738168803705268617	lib/libgtest.a	91a9825797c85c22
 4	5998	1738168788877300567	Google_tests/lib/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	705e835b404a3c5e
 65	78	1738168803767268483	lib/libgtest_main.a	75600137a1983124
-4	7249	1738354490636486801	Google_tests/CMakeFiles/Google_Tests_run.dir/test1.cpp.o	49b780bae5c956ac
-7249	7689	1738354497880754084	Google_tests/Google_Tests_run	1bbbece3236554d2
-3	7930	1738354677539739053	Google_tests/CMakeFiles/Google_Tests_run.dir/test1.cpp.o	49b780bae5c956ac
-3	8339	1738354677539739053	CMakeFiles/generator_lib.dir/Labyrinth.cpp.o	4ad9c9a1f6edac48
-8339	8522	1738354685876071950	libgenerator_lib.a	9738efa7a16d0e40
-8522	8941	1738354686059079897	Google_tests/Google_Tests_run	1bbbece3236554d2
-3	7877	1738354798757995186	Google_tests/CMakeFiles/Google_Tests_run.dir/test1.cpp.o	49b780bae5c956ac
-2	8348	1738354798756995081	CMakeFiles/generator_lib.dir/Labyrinth.cpp.o	4ad9c9a1f6edac48
-8348	8540	1738354807102887852	libgenerator_lib.a	9738efa7a16d0e40
-8540	8953	1738354807294908680	Google_tests/Google_Tests_run	1bbbece3236554d2

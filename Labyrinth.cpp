@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <iostream>
 #include <functional>
+#include <bits/fs_path.h>
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
 void Labyrinth::setCell(int x, int y, char ch) {
@@ -314,7 +315,36 @@ int Labyrinth::calculateScore() const {
     return score;
 }
 int Labyrinth::getScore() const {
-    logger->info("EntryPoint| Labyrinth::getScore()");
-    logger->info("End| Labyrinth::getScore()");
+    logger->info("EntryPoint| Labyrinth::getScore()\n");
+    logger->info("End| Labyrinth::getScore()\n");
     return score;
+}
+Labyrinth &Labyrinth::operator=(const Labyrinth &other) {
+    logger->info("EnterPoint| Labyrinth::operator=()\n");
+    if (this == &other) {
+        logger->info("End| Labyrinth::operator=()\n");
+        return *this;
+    }
+    score = other.score;
+    labyrinth = other.labyrinth;
+    logger->info("End| Labyrinth::operator=()\n");
+    return *this;
+}
+Labyrinth Labyrinth::getDescendant(Labyrinth &partner) {
+    logger->info("EntryPoint| Labyrinth::getDescendant()\n");
+    Labyrinth descendant = *this;
+    int maxNumberOfMutations = 7;
+    Generator generator;
+    int numberOfMutations = generator.getRandomInt(0,maxNumberOfMutations);
+    for (int i =0;i<numberOfMutations;i++) {
+        auto randomPoint = generator.getRandomPoint(LABYRINTH_WIDTH,LABYRINTH_HEIGHT);
+        descendant.setCell(randomPoint.first,randomPoint.second,partner.getCell(randomPoint.first,randomPoint.second));
+    }
+    logger->info("End| Labyrinth::getDescendant()\n");
+    return descendant;
+}
+bool Labyrinth::operator<(const Labyrinth &other) const {
+    logger->info("EntryPoint| Labyrinth::operator<()\n");
+    logger->info("End| Labyrinth::operator<()\n");
+    return score < other.score;
 }
