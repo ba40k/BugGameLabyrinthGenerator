@@ -8,15 +8,16 @@
 #include "Generator.h"
 #include "Labyrinth.h"
 
+template<typename PopulationMember>
 class Population {
 public:
-    Population(int _populationSize = initialPopulationSize);
-    Labyrinth getBestLabyrinth() const; // дает лучший лабиринт
+    explicit Population(int _populationSize = initialPopulationSize);
+    PopulationMember getBestLabyrinth() const; // дает лучший лабиринт
     void refreshGeneration(); // создает новые лабиринты и удаляет худшие
     void mutate();// вызывает мутации у членов популяции
     void setMaxPopulationSize(int _populationSize); // установить максимальный размер популяции
     int getPopulationSize(); // возвращает размер популяции
-    std::multiset<Labyrinth>::iterator getRandomLabyrinth(); // получить случайный член популяции
+    std::multiset<PopulationMember>::iterator getRandomLabyrinth(); // получить случайный член популяции
     ~Population() = default;
 private:
     static const int max_size = 1048576 * 5;
@@ -26,7 +27,7 @@ private:
     void shrinkPopulation();
     int maxPopulationSize = 1000;
     static const int initialPopulationSize = 100;
-    std::multiset<Labyrinth> population;
+    std::multiset<PopulationMember> population;
     int populationSize;
 };
 

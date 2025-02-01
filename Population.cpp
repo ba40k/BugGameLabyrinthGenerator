@@ -4,19 +4,22 @@
 
 #include "Population.h"
 #include <functional>
-std::shared_ptr<spdlog::logger> Population::logger = spdlog::rotating_logger_mt("PopulationLogger", "../../logs/PopulationLog.txt", max_size, max_files);
-void Population::refreshPopulationSize() {
+template<class PopulationMember>
+std::shared_ptr<spdlog::logger> Population<PopulationMember>::logger = spdlog::rotating_logger_mt("PopulationLogger", "../../logs/PopulationLog.txt", max_size, max_files);
+template<class PopulationMember>
+void Population<PopulationMember>::refreshPopulationSize() {
     logger->info("Entrypoint| Population::refreshPopulationSize");
     populationSize = population.size();
     logger->info("End| Population::refreshPopulationSize");
 }
-int Population::getPopulationSize() {
+template<class PopulationMember>
+int Population<PopulationMember>::getPopulationSize() {
     logger->info("Entrypoint| Population::getPopulationSize");
     logger->info("End| Population::getPopulationSize");
     return populationSize;
 }
-
-std::set<Labyrinth>::iterator Population::getRandomLabyrinth() {
+template<class PopulationMember>
+std::multiset<Labyrinth>::iterator Population<PopulationMember>::getRandomLabyrinth() {
         logger->info("Entrypoint| Population::getRandomLabyrinth");
         auto it = population.begin();
         Generator generator;
@@ -25,12 +28,13 @@ std::set<Labyrinth>::iterator Population::getRandomLabyrinth() {
         logger->info("End| Population::getRandomLabyrinth");
         return it;
 }
-void Population::mutate() {
+template<class PopulationMember>
+void Population<PopulationMember>::mutate() {
     logger->info("Entrypoint| Population::mutate");
     Generator generator;
     int iterations = generator.getRandomInt(1,populationSize);
     while (iterations--) {
-        std::set<Labyrinth>::iterator labyrinth = getRandomLabyrinth();
+        std::multiset<Labyrinth>::iterator labyrinth = getRandomLabyrinth();
         auto newLabyrinth = *labyrinth;
         newLabyrinth.mutation();
         population.erase(labyrinth);
@@ -39,20 +43,23 @@ void Population::mutate() {
     logger->info("End| Population::mutate");
     refreshPopulationSize();
 }
-void Population::shrinkPopulation() {
+template<class PopulationMember>
+void Population<PopulationMember>::shrinkPopulation() {
     logger->info("Entrypoint| Population::shrinkPopulation");
     while(population.size() > maxPopulationSize) {
         population.erase(population.begin());
     }
     logger->info("End| Population::shrinkPopulation");
 }
-Labyrinth Population::getBestLabyrinth() const {
+template<class PopulationMember>
+PopulationMember Population<PopulationMember>::getBestLabyrinth() const {
     logger->info("Entrypoint| Population::getBestLabyrinth");
     auto labyrinth = population.rbegin();
     logger->info("End| Population::getBestLabyrinth");
     return *labyrinth;
 }
-Population::Population(int _populationSize) {
+template<class PopulationMember>
+Population<PopulationMember>::Population(int _populationSize) {
     logger->info("Entrypoint| Population::Population");
     populationSize = _populationSize;
     while (_populationSize--) {
@@ -62,14 +69,16 @@ Population::Population(int _populationSize) {
     maxPopulationSize = std::max(maxPopulationSize, populationSize*10);
     logger->info("End| Population::Population");
 }
-void Population::setMaxPopulationSize(int _populationSize) {
+template<class PopulationMember>
+void Population<PopulationMember>::setMaxPopulationSize(int _populationSize) {
     logger->info("Entrypoint| Population::setMaxPopulationSize");
     maxPopulationSize = _populationSize;
     shrinkPopulation();
     refreshPopulationSize();
     logger->info("End| Population::setMaxPopulationSize");
 }
-void Population::refreshGeneration() {
+template<class PopulationMember>
+void Population<PopulationMember>::refreshGeneration() {
     logger->info("Entrypoint| Population::refreshGeneration");
     Generator generator;
     int iterations = generator.getRandomInt(1, population.size());
