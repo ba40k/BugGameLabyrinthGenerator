@@ -7,8 +7,11 @@
 #include <fstream>
 #include "Labyrinth.h"
 #include "Population.h"
-int main() {
-    std::ofstream out("../output.txt");
+#include <string>
+#include <thread>
+void task(int number) {
+    std::string fileName = "output" + std::to_string(number) + ".txt";
+    std::ofstream out(fileName);
     Population<Labyrinth> pop(20);
     int iterations = 50;
     while (iterations--){
@@ -21,5 +24,18 @@ int main() {
         out<<'\n';
         out.flush();
     }
-
+}
+int main() {
+    std::thread task1(task, 1);
+    std::thread task2(task, 2);
+    std::thread task3(task, 3);
+    std::thread task4(task, 4);
+    std::thread task5(task, 5);
+    std::thread task6(task, 6);
+    task1.join();
+    task2.join();
+    task3.join();
+    task4.join();
+    task5.join();
+    task6.join();
 }
