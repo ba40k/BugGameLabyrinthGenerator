@@ -96,13 +96,6 @@ build CMakeFiles/generator_lib.dir/Generator.cpp.o: CXX_COMPILER__generator_lib_
   OBJECT_DIR = CMakeFiles/generator_lib.dir
   OBJECT_FILE_DIR = CMakeFiles/generator_lib.dir
 
-build CMakeFiles/generator_lib.dir/Population.cpp.o: CXX_COMPILER__generator_lib_unscanned_Debug /home/radamir/CLionProjects/BugGameLabyrinthGenerator/Population.cpp || cmake_object_order_depends_target_generator_lib
-  DEP_FILE = CMakeFiles/generator_lib.dir/Population.cpp.o.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -I/home/radamir/CLionProjects/BugGameLabyrinthGenerator/spdlog/include
-  OBJECT_DIR = CMakeFiles/generator_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/generator_lib.dir
-
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target generator_lib
@@ -111,7 +104,7 @@ build CMakeFiles/generator_lib.dir/Population.cpp.o: CXX_COMPILER__generator_lib
 #############################################
 # Link the static library libgenerator_lib.a
 
-build libgenerator_lib.a: CXX_STATIC_LIBRARY_LINKER__generator_lib_Debug CMakeFiles/generator_lib.dir/Labyrinth.cpp.o CMakeFiles/generator_lib.dir/Generator.cpp.o CMakeFiles/generator_lib.dir/Population.cpp.o
+build libgenerator_lib.a: CXX_STATIC_LIBRARY_LINKER__generator_lib_Debug CMakeFiles/generator_lib.dir/Labyrinth.cpp.o CMakeFiles/generator_lib.dir/Generator.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/generator_lib.dir
   POST_BUILD = :
