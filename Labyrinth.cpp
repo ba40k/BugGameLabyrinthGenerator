@@ -330,7 +330,7 @@ Labyrinth &Labyrinth::operator=(const Labyrinth &other) {
     logger->info("End| Labyrinth::operator=()\n");
     return *this;
 }
-Labyrinth Labyrinth::getDescendant(Labyrinth &partner) {
+Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     logger->info("EntryPoint| Labyrinth::getDescendant()\n");
     Labyrinth descendant = *this;
     int maxNumberOfMutations = 7;
@@ -348,3 +348,12 @@ bool Labyrinth::operator<(const Labyrinth &other) const {
     logger->info("End| Labyrinth::operator<()\n");
     return score < other.score;
 }
+void Labyrinth::mutation() {
+    logger->info("EntryPoint| Labyrinth::mutation()\n");
+    Generator generator;
+    auto point = generator.getRandomPoint(LABYRINTH_WIDTH,LABYRINTH_HEIGHT);
+    bool randomBool = generator.getRandomBool();
+    (randomBool==1)?setCell(point.first,point.second,'#'):setCell(point.first,point.second,'.');
+    logger->info("End| Labyrinth::mutation()\n");
+}
+

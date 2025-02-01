@@ -25,12 +25,13 @@ public:
     [[nodiscard]] bool isPassable() const; // проверка лабиринта на проходимость
     [[nodiscard]] int getScore() const; //  здесь мы не вычисляем счет, а возвращаем то, что уже было вычислено
     void setCell(int x, int y, char value); // установить указанное значение в выбранной клетке
-    Labyrinth getDescendant(Labyrinth &partner); // получить потомка
+    [[nodiscard]] Labyrinth getDescendant(const Labyrinth &partner) const; // получить потомка
     [[nodiscard]] static bool isBelongsToLabyrinth(int x, int y) ; // проверка на то попадает ли точка в лабиринт
     [[nodiscard]] bool isPassable(int x, int y) const; // этот метод - проверка на то проходима ли клетка
     [[nodiscard]] char getCell(int x, int y) const; // получить то, что хранится в клетке
     [[nodiscard]] char getWallSymbol() const; // узнать символ стены
     [[nodiscard]] char getFloorSymbol() const; // узнать символ пола
+    void mutation();
     ~Labyrinth() = default;
 private:
     [[nodiscard]] int calculateScore() const; // вычислить счет этого лабиринта
