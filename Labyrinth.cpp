@@ -363,8 +363,7 @@ void Labyrinth::mutation() {
     logger->info("EntryPoint| Labyrinth::mutation()\n");
     Generator generator;
     auto point = generator.getRandomPoint(LABYRINTH_WIDTH-1,LABYRINTH_HEIGHT-1);
-    bool randomBool = generator.getRandomBool();
-    (randomBool==1)?setCell(point.first,point.second,'#'):setCell(point.first,point.second,'.');
+    (getCell(point.first,point.second)=='.')?setCell(point.first,point.second,'#'):setCell(point.first,point.second,'.');
     logger->info("End| Labyrinth::mutation()\n");
 }
 

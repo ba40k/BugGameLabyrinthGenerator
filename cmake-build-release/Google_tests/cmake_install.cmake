@@ -1,4 +1,4 @@
-# Install script for directory: /home/radamir/CLionProjects/BugGameLabyrinthGenerator/Google_tests
+# Install script for directory: /home/radamir/CLionProjects/BugGameLabyrinthGenerator5/Google_tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,13 +37,13 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
+# Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/radamir/CLionProjects/BugGameLabyrinthGenerator/cmake-build-release/Google_tests/lib/cmake_install.cmake")
+  include("/home/radamir/CLionProjects/BugGameLabyrinthGenerator5/cmake-build-release/Google_tests/lib/cmake_install.cmake")
 endif()
 

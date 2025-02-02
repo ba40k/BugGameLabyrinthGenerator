@@ -12,14 +12,18 @@
 void task(int number) {
     std::string fileName = "../res/output" + std::to_string(number) + ".txt";
     std::ofstream out(fileName);
-    Population<Labyrinth> pop(20);
+    Population<Labyrinth> pop(50);
+    pop.setMaxPopulationSize(100);
     Labyrinth bestLabyrinth;
-    int iterations = 500;
+    int iterations = 5000;
     while (iterations--){
         out.seekp(0);
         pop.mutate();
-        pop.refreshGeneration();
         pop.mutate();
+        pop.mutate();
+        if (iterations % 100 == 0) {
+            pop.refreshGeneration();
+        }
         if (pop.getBestLabyrinth().getScore() > bestLabyrinth.getScore()) {
             bestLabyrinth = pop.getBestLabyrinth();
         }
@@ -38,6 +42,9 @@ int main() {
     std::thread task6(task, 6);
     std::thread task7(task, 7);
     std::thread task8(task, 8);
+    std::thread task9(task, 9);
+    std::thread task10(task, 10);
+    std::thread task11(task, 11);
     task1.join();
     task2.join();
     task3.join();
@@ -46,4 +53,7 @@ int main() {
     task6.join();
     task7.join();
     task8.join();
+    task9.join();
+    task10.join();
+    task11.join();
 }

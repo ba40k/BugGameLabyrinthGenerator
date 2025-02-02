@@ -25,7 +25,7 @@ private:
     static std::shared_ptr<spdlog::logger> logger;
     void refreshPopulationSize();
     void shrinkPopulation();
-    int maxPopulationSize = 100;
+    int maxPopulationSize = 2000;
     static const int initialPopulationSize = 50;
     std::multiset<PopulationMember> population;
     int populationSize;
