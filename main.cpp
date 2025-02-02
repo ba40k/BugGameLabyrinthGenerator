@@ -17,19 +17,21 @@ void task(int number) {
     Labyrinth bestLabyrinth;
     int iterations = 5000;
     while (iterations--){
-        out.seekp(0);
         pop.mutate();
         pop.mutate();
         pop.mutate();
-        if (iterations % 100 == 0) {
+        if (iterations % 30 == 0) {
             pop.refreshGeneration();
         }
         if (pop.getBestLabyrinth().getScore() > bestLabyrinth.getScore()) {
             bestLabyrinth = pop.getBestLabyrinth();
         }
-        out<<bestLabyrinth.getScore()<<'\n';
-        bestLabyrinth.printLabyrinth(out);
-        out<<'\n';
+        out.seekp(0);
+        out<<"current score - "<<pop.getBestLabyrinth().getScore()<<'\n';
+        out<<"best score - "<<bestLabyrinth.getScore()<<'\n';
+        out<<"current population - "<<pop.getPopulationSize()<<'\n';
+        out<<"iteration - "<<5000-iterations+1<<'\n';
+        pop.getBestLabyrinth().printLabyrinth(out);
         out.flush();
     }
 }

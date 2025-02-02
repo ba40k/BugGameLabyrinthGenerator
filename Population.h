@@ -115,6 +115,7 @@ void Population<PopulationMember>::refreshGeneration() {
         auto child = father->getDescendant((*mother));
         population.insert(child);
     }
+    shrinkPopulation();
     refreshPopulationSize();
     logger->info("End| Population::refreshGeneration");
 }

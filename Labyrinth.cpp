@@ -343,7 +343,12 @@ Labyrinth &Labyrinth::operator=(Labyrinth &&other) noexcept {
 }
 Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     logger->info("EntryPoint| Labyrinth::getDescendant()\n");
-    Labyrinth descendant = *this;
+    Labyrinth descendant;
+    if (this->score > partner.score) {
+        descendant = *this;
+    }else {
+        descendant = partner;
+    }
     int maxNumberOfMutations = 7;
     Generator generator;
     int numberOfMutations = generator.getRandomInt(0,maxNumberOfMutations);
@@ -361,9 +366,34 @@ bool Labyrinth::operator<(const Labyrinth &other) const {
 }
 void Labyrinth::mutation() {
     logger->info("EntryPoint| Labyrinth::mutation()\n");
+    // сразу мы проверяеи будем ли совершать мутацию в "окрестности" последней удачной мутации
     Generator generator;
+    int chance = generator.getRandomInt(0,100);
+    if (chance >40) {
+        // тогда делаем мутацию в окрестности этой точки
+        int shiftX = generator.getRandomInt(-2,2);
+        int shiftY = generator.getRandomInt(-2,2);
+        auto point = lastGoodMutation;
+        point.first += shiftX;
+        point.second += shiftY;
+        point.first = std::max(point.first,0);
+        point.second = std::max(point.second,0);
+        point.first = std::min(point.first,LABYRINTH_WIDTH-1);
+        point.second = std::min(point.second,LABYRINTH_HEIGHT-1);
+        int oldScore = score;
+        (getCell(point.first,point.second)=='.')?setCell(point.first,point.second,'#'):setCell(point.first,point.second,'.');
+        if (score > oldScore) {
+            lastGoodMutation = point;
+        }
+        logger->info("End| Labyrinth::mutation()\n");
+        return ;
+    }
     auto point = generator.getRandomPoint(LABYRINTH_WIDTH-1,LABYRINTH_HEIGHT-1);
+    int oldScore = score;
     (getCell(point.first,point.second)=='.')?setCell(point.first,point.second,'#'):setCell(point.first,point.second,'.');
+    if (score > oldScore) {
+        lastGoodMutation = point;
+    }
     logger->info("End| Labyrinth::mutation()\n");
 }
 

@@ -50,5 +50,6 @@ private:
     const char floorSymbol = '.';
     const int acceptableScore = 1e5; // достаточный для меня счет
     const int inf = 1e9;
+    std::pair<int,int> lastGoodMutation = {18, 28};
 };
 #endif //LABYRINTH_H
