@@ -13,7 +13,7 @@ void task(int number) {
     std::string fileName = "../res/output" + std::to_string(number) + ".txt";
     std::ofstream out(fileName);
     Population<Labyrinth> pop(50);
-    pop.setMaxPopulationSize(100);
+    pop.setMaxPopulationSize(200);
     Labyrinth bestLabyrinth;
     int iterations = 5000;
     while (iterations--){

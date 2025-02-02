@@ -371,8 +371,8 @@ void Labyrinth::mutation() {
     int chance = generator.getRandomInt(0,100);
     if (chance >40) {
         // тогда делаем мутацию в окрестности этой точки
-        int shiftX = generator.getRandomInt(-2,2);
-        int shiftY = generator.getRandomInt(-2,2);
+        int shiftX = generator.getRandomInt(-1,1);
+        int shiftY = generator.getRandomInt(-1,1);
         auto point = lastGoodMutation;
         point.first += shiftX;
         point.second += shiftY;
