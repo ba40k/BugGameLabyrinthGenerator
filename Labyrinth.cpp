@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <iostream>
 #include <functional>
+#include <set>
+
 
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
@@ -344,17 +346,18 @@ Labyrinth &Labyrinth::operator=(Labyrinth &&other) noexcept {
 Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     logger->info("EntryPoint| Labyrinth::getDescendant()\n");
     Labyrinth descendant;
-    if (this->score > partner.score) {
+    Generator generator;
+    if (generator.getRandomInt(0,100) > 50) {
         descendant = *this;
     }else {
         descendant = partner;
     }
-    int maxNumberOfMutations = 7;
-    Generator generator;
+    int maxNumberOfMutations = 50;
+
     int numberOfMutations = generator.getRandomInt(0,maxNumberOfMutations);
-    for (int i =0;i<numberOfMutations;i++) {
-        auto randomPoint = generator.getRandomPoint(LABYRINTH_WIDTH-1,LABYRINTH_HEIGHT-1);
-        descendant.setCell(randomPoint.first,randomPoint.second,partner.getCell(randomPoint.first,randomPoint.second));
+    while (numberOfMutations--) {
+        auto point = generator.getRandomPoint(LABYRINTH_WIDTH-1, LABYRINTH_HEIGHT-1);
+        descendant.setCell(point.first,point.second,partner.getCell(point.first,point.second));
     }
     logger->info("End| Labyrinth::getDescendant()\n");
     return descendant;

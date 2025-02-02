@@ -121,20 +121,9 @@ void Population<PopulationMember>::refreshGeneration() {
         auto child = father->getDescendant((*mother));
         population.insert(child);
     }
-    iterations = generator.getRandomInt(1, population.size()/2);
-    while (iterations--) {
-        auto labyrinth = getRandomLabyrinth();
-        population.erase(labyrinth);
-    }
-    iterations = generator.getRandomInt(1, population.size());
-    while (iterations--) {
-        auto father = getRandomLabyrinth();
-        auto mother = getRandomLabyrinth();
-        auto child = father->getDescendant((*mother));
-        population.insert(child);
-    }
-    shrinkPopulation();
-    refreshPopulationSize();
+
+
+
     logger->info("End| Population::refreshGeneration");
 }
 
