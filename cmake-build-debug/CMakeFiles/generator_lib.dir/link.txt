@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgenerator_lib.a CMakeFiles/generator_lib.dir/Labyrinth.cpp.o CMakeFiles/generator_lib.dir/Generator.cpp.o
+/usr/bin/ranlib libgenerator_lib.a
