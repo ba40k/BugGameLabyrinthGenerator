@@ -58,13 +58,14 @@ template<class PopulationMember>
 void Population<PopulationMember>::mutate() {
     logger->info("Entrypoint| Population::mutate");
     Generator generator;
-    int iterations = generator.getRandomInt(1,populationSize);
+    int iterations = generator.getRandomInt(populationSize/2,populationSize);
+    auto candidate = population.rbegin();
     while (iterations--) {
-        std::multiset<Labyrinth>::iterator labyrinth = getRandomLabyrinth();
-        auto newLabyrinth = *labyrinth;
+        auto newLabyrinth = *candidate;
         newLabyrinth.mutation();
         //population.erase(labyrinth);
         population.insert(newLabyrinth);
+        candidate++;
     }
     logger->info("End| Population::mutate");
     shrinkPopulation();
@@ -108,7 +109,24 @@ template<class PopulationMember>
 void Population<PopulationMember>::refreshGeneration() {
     logger->info("Entrypoint| Population::refreshGeneration");
     Generator generator;
-    int iterations = generator.getRandomInt(1, population.size());
+    int iterations = generator.getRandomInt(1, population.size()/2);
+    while (iterations--) {
+        auto labyrinth = getRandomLabyrinth();
+        population.erase(labyrinth);
+    }
+    iterations = generator.getRandomInt(1, population.size());
+    while (iterations--) {
+        auto father = getRandomLabyrinth();
+        auto mother = getRandomLabyrinth();
+        auto child = father->getDescendant((*mother));
+        population.insert(child);
+    }
+    iterations = generator.getRandomInt(1, population.size()/2);
+    while (iterations--) {
+        auto labyrinth = getRandomLabyrinth();
+        population.erase(labyrinth);
+    }
+    iterations = generator.getRandomInt(1, population.size());
     while (iterations--) {
         auto father = getRandomLabyrinth();
         auto mother = getRandomLabyrinth();
