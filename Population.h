@@ -59,13 +59,17 @@ void Population<PopulationMember>::mutate() {
     logger->info("Entrypoint| Population::mutate");
     Generator generator;
     int iterations = generator.getRandomInt(populationSize/2,populationSize);
-    auto candidate = population.rbegin();
     while (iterations--) {
+        auto candidate = getRandomLabyrinth();
+        int dieChance = generator.getRandomInt(0,100);
         auto newLabyrinth = *candidate;
+        if (dieChance<5) {
+            population.erase(candidate);
+        }
         newLabyrinth.mutation();
+
         //population.erase(labyrinth);
         population.insert(newLabyrinth);
-        candidate++;
     }
     logger->info("End| Population::mutate");
     shrinkPopulation();
@@ -109,12 +113,11 @@ template<class PopulationMember>
 void Population<PopulationMember>::refreshGeneration() {
     logger->info("Entrypoint| Population::refreshGeneration");
     Generator generator;
-    int iterations = generator.getRandomInt(1, population.size()/2);
-    while (iterations--) {
-        auto labyrinth = getRandomLabyrinth();
-        population.erase(labyrinth);
+    while (populationSize > 20) {
+        population.erase(population.begin());
+        --populationSize;
     }
-    iterations = generator.getRandomInt(1, population.size());
+    int iterations = generator.getRandomInt(1, population.size());
     while (iterations--) {
         auto father = getRandomLabyrinth();
         auto mother = getRandomLabyrinth();
@@ -122,7 +125,8 @@ void Population<PopulationMember>::refreshGeneration() {
         population.insert(child);
     }
 
-
+    shrinkPopulation();
+    refreshPopulationSize();
 
     logger->info("End| Population::refreshGeneration");
 }
