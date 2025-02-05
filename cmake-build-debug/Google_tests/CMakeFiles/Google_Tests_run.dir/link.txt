@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/Google_Tests_run.dir/test1.cpp.o CMakeFiles/Google_Tests_run.dir/test2.cpp.o CMakeFiles/Google_Tests_run.dir/test3.cpp.o -o Google_Tests_run  ../libgenerator_lib.a ../lib/libgtest.a ../lib/libgtest_main.a ../lib/libgtest.a
