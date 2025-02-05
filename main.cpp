@@ -21,7 +21,7 @@ void task(int number) {
         pop.mutate();
         pop.mutate();
         pop.mutate();
-        if (iterations % 100 == 0) {
+        if (iterations % 20 == 0) {
             pop.refreshGeneration();
         }
         if (pop.getBestLabyrinth().getScore() > bestLabyrinth.getScore()) {

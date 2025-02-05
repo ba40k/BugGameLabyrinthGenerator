@@ -27,6 +27,7 @@ private:
     void shrinkPopulation();
     int maxPopulationSize = 2000;
     static const int initialPopulationSize = 50;
+    const int maxNumberOfMutations = 20;
     std::set<PopulationMember> population;
     int populationSize;
 };
@@ -58,6 +59,14 @@ template<class PopulationMember>
 void Population<PopulationMember>::mutate() {
     logger->info("Entrypoint| Population::mutate");
     // поменять
+    Generator generator;
+    int numberOfMutations = generator.getRandomInt(1,maxNumberOfMutations);
+    for (int i =0;i<numberOfMutations;i++) {
+        auto randomLabyrinth = getRandomLabyrinth();
+        auto newLabyrinth = *randomLabyrinth;
+        newLabyrinth.mutation();
+        population.insert(newLabyrinth);
+    }
     logger->info("End| Population::mutate");
 }
 template<class PopulationMember>
