@@ -39,21 +39,9 @@ int main() {
     std::thread task3(task, 3);
     std::thread task4(task, 4);
     std::thread task5(task, 5);
-    std::thread task6(task, 6);
-    std::thread task7(task, 7);
-    std::thread task8(task, 8);
-    std::thread task9(task, 9);
-    std::thread task10(task, 10);
-    std::thread task11(task, 11);
     task1.join();
     task2.join();
     task3.join();
     task4.join();
     task5.join();
-    task6.join();
-    task7.join();
-    task8.join();
-    task9.join();
-    task10.join();
-    task11.join();
 }
