@@ -52,5 +52,7 @@ private:
     const int acceptableScore = 1e5; // достаточный для меня счет
     const int inf = 1e9;
     const int maxNumberOfMutations = 10;
+    const int maxMutationMaskHeight = 5;
+    const int maxMutationMaskWidth = 5;
 };
 #endif //LABYRINTH_H

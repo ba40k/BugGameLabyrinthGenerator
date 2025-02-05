@@ -22,7 +22,7 @@ Generator::Generator(const int seed, const int min, const int max) {
     generator = std::mt19937(seed);
     logger->info("End| Generator::Generator(int seed, int min, int max)\n");
 }
-bool Generator::getRandomBool() {
+bool Generator::getRandomBool()  {
     logger->info("Enterpoint| Generator::getRandomBool()\n");
     logger->info("End| Generator::getRandomBool()\n");
     return distribution(generator)%2;
@@ -83,4 +83,14 @@ std::pair<int, int> Generator::getRandomPoint(const int LIMIT_X,const  int LIMIT
     int y = getRandomInt(0, LIMIT_Y);
     logger->info("End| Generator::getRandomPoint(int LIMIT_X, int LIMIT_Y)\n");
     return std::make_pair(x, y);
+}
+std::vector<std::vector<char> > Generator::getRandomMask(int height, int width)  {
+    logger->info("Enterpoint| Generator::getRandomMask(int height, int width)\n");
+    std::vector<std::vector<char> > mask(height, std::vector<char>(width));
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            getRandomBool()==1?mask[i][j]='#':mask[i][j]='.';
+        }
+    }
+    return mask;
 }

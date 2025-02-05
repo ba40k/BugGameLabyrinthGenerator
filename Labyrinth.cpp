@@ -362,11 +362,14 @@ void Labyrinth::xorMask(int startX, int startY, std::vector<std::vector<char> > 
 
 Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     logger->info("EntryPoint| Labyrinth::getDescendant()\n");
-    Labyrinth descendant = *this;
     Generator generator;
+    Labyrinth descendant;
+    generator.getRandomBool()==1?descendant=*this:descendant=partner;
     int numberOfMutations = generator.getRandomInt(0,maxNumberOfMutations);
     for (int i =0;i<numberOfMutations;i++) {
-        auto 
+        int maskHeight = generator.getRandomInt(1,maxMutationMaskHeight);
+        int maskWidth = generator.getRandomInt(1,maxMutationMaskWidth);
+        std::vector<std::vector<char>> mask
     }
     logger->info("End| Labyrinth::getDescendant()\n");
     return descendant;

@@ -8,6 +8,7 @@
 #include <utility>
 #include <random>
 #include<spdlog/sinks/rotating_file_sink.h>
+#include <vector>
 class Generator {
 public:
     Generator(); // дефолтный генератор, использует стдшный рандом
@@ -24,6 +25,7 @@ public:
     void setMaxRandomNumb(int max);// установить верхнюю границу рандома
     [[nodiscard]] int getMinRandomNumb() const;// узнать нижнюю границу рандома
     [[nodiscard]] int getMaxRandomNumb() const;// узнать верхнюю границу рандома
+    std::vector<std::vector<char>> getRandomMask(int height, int width) ; // дает случайную маску заданных размеров
     ~Generator() = default;
 private:
     static const int max_size = 1048576 * 5;
