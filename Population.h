@@ -17,7 +17,7 @@ public:
     void mutate();// вызывает мутации у членов популяции
     void setMaxPopulationSize(int _populationSize); // установить максимальный размер популяции
     int getPopulationSize(); // возвращает размер популяции
-    std::multiset<PopulationMember>::iterator getRandomLabyrinth(); // получить случайный член популяции
+    std::set<PopulationMember>::iterator getRandomLabyrinth(); // получить случайный член популяции
     ~Population() = default;
 private:
     static const int max_size = 1048576 * 5;
@@ -27,7 +27,7 @@ private:
     void shrinkPopulation();
     int maxPopulationSize = 2000;
     static const int initialPopulationSize = 50;
-    std::multiset<PopulationMember> population;
+    std::set<PopulationMember> population;
     int populationSize;
 };
 template<class PopulationMember>
@@ -45,7 +45,7 @@ int Population<PopulationMember>::getPopulationSize() {
     return populationSize;
 }
 template<class PopulationMember>
-std::multiset<PopulationMember>::iterator Population<PopulationMember>::getRandomLabyrinth() {
+std::set<PopulationMember>::iterator Population<PopulationMember>::getRandomLabyrinth() {
         logger->info("Entrypoint| Population::getRandomLabyrinth");
         auto it = population.begin();
         Generator generator;
@@ -57,18 +57,8 @@ std::multiset<PopulationMember>::iterator Population<PopulationMember>::getRando
 template<class PopulationMember>
 void Population<PopulationMember>::mutate() {
     logger->info("Entrypoint| Population::mutate");
-    Generator generator;
-    int iterations = generator.getRandomInt(1,populationSize);
-    while (iterations--) {
-        std::multiset<Labyrinth>::iterator labyrinth = getRandomLabyrinth();
-        auto newLabyrinth = *labyrinth;
-        newLabyrinth.mutation();
-        //population.erase(labyrinth);
-        population.insert(newLabyrinth);
-    }
+    // поменять
     logger->info("End| Population::mutate");
-    shrinkPopulation();
-    refreshPopulationSize();
 }
 template<class PopulationMember>
 void Population<PopulationMember>::shrinkPopulation() {
@@ -89,11 +79,11 @@ template<class PopulationMember>
 Population<PopulationMember>::Population(int _populationSize) {
     logger->info("Entrypoint| Population::Population");
     populationSize = _populationSize;
-    while (_populationSize--) {
+    while (population.size() != _populationSize) {
         Labyrinth newLabyrinth;
         population.insert(newLabyrinth);
     }
-    maxPopulationSize = std::max(maxPopulationSize, populationSize*10);
+    maxPopulationSize = std::max(maxPopulationSize, populationSize*2);
     logger->info("End| Population::Population");
 }
 template<class PopulationMember>
