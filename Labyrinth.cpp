@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <iostream>
 #include <functional>
+#include <set>
+#include <bits/fs_fwd.h>
 
 std::vector<std::pair<int,int>> Labyrinth::moves= {{+1,0},{0,+1},{-1,0},{0,-1}};
 std::shared_ptr<spdlog::logger> Labyrinth::logger = spdlog::rotating_logger_mt("LabyrinthLogger", "../../logs/LabyrinthLog.txt", max_size, max_files);
@@ -341,15 +343,30 @@ Labyrinth &Labyrinth::operator=(Labyrinth &&other) noexcept {
     logger->info("End| Labyrinth::operator=()\n");
     return *this;
 }
+void Labyrinth::xorMask(int startX, int startY, std::vector<std::vector<char> > &mask) {
+    logger->info("EntryPoint| Labyrinth::xorMask()\n");
+    int maskHeight = mask.size();
+    int maskWidth = mask[0].size();
+    for (int i = startY; i < startY + maskHeight; i++) {
+        for (int j = startX; j < startX + maskWidth; j++) {
+            if (getCell(j,i) == getFloorSymbol()) {
+                setCell(j,i,mask[i - startY][j - startX]);
+            } else {
+                if (mask[i- startY][j - startX] == wallSymbol) {
+                    setCell(j,i,floorSymbol);
+                }
+            }
+        }
+    }
+}
+
 Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     logger->info("EntryPoint| Labyrinth::getDescendant()\n");
     Labyrinth descendant = *this;
-    int maxNumberOfMutations = 7;
     Generator generator;
     int numberOfMutations = generator.getRandomInt(0,maxNumberOfMutations);
     for (int i =0;i<numberOfMutations;i++) {
-        auto randomPoint = generator.getRandomPoint(LABYRINTH_WIDTH-1,LABYRINTH_HEIGHT-1);
-        descendant.setCell(randomPoint.first,randomPoint.second,partner.getCell(randomPoint.first,randomPoint.second));
+        auto 
     }
     logger->info("End| Labyrinth::getDescendant()\n");
     return descendant;

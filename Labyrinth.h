@@ -35,6 +35,7 @@ public:
     ~Labyrinth() = default;
 private:
     [[nodiscard]] int calculateScore() const; // вычислить счет этого лабиринта
+    void xorMask(int startX, int startY, std::vector<std::vector<char>> &mask);
     void printFrameHorizontalPart(std::ostream& out = std::cout) const; // вывод горизонтальной части рамки
     void refreshScore();
     int score;
@@ -50,5 +51,6 @@ private:
     const char floorSymbol = '.';
     const int acceptableScore = 1e5; // достаточный для меня счет
     const int inf = 1e9;
+    const int maxNumberOfMutations = 10;
 };
 #endif //LABYRINTH_H
