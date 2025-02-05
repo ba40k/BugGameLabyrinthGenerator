@@ -345,6 +345,7 @@ Labyrinth &Labyrinth::operator=(Labyrinth &&other) noexcept {
 }
 void Labyrinth::xorMask(int startX, int startY, std::vector<std::vector<char> > &mask) {
     logger->info("EntryPoint| Labyrinth::xorMask()\n");
+   // std::cout<<"xorMask\n";
     int maskHeight = mask.size();
     int maskWidth = mask[0].size();
     for (int i = startY; i < startY + maskHeight; i++) {
@@ -362,13 +363,16 @@ void Labyrinth::xorMask(int startX, int startY, std::vector<std::vector<char> > 
 }
 std::vector<std::vector<char> > Labyrinth::getMask(int leftUpX, int leftUpY, int height, int width) const {
     logger->info("Entrypoint| Labyrinth::getMask(int leftUpX, int leftUpY, int height, int width) const\n");
+   // std::cout<<"getMask\n";
     std::vector<std::vector<char> > mask(height, std::vector<char>(width));
     for (int i = leftUpY; i < leftUpY + height; i++) {
         for (int j = leftUpX; j < leftUpX + width; j++) {
-            mask[i][j] = getCell(j,i);
+            mask[i - leftUpY][j - leftUpX] = getCell(j,i);
         }
     }
     logger->info("End| Labyrinth::getMask()\n");
+    return mask;
+
 }
 
 Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{

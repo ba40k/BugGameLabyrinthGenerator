@@ -17,7 +17,7 @@ public:
     void mutate();// вызывает мутации у членов популяции
     void setMaxPopulationSize(int _populationSize); // установить максимальный размер популяции
     int getPopulationSize(); // возвращает размер популяции
-    std::set<PopulationMember>::iterator getRandomLabyrinth(); // получить случайный член популяции
+    std::multiset<PopulationMember>::iterator getRandomLabyrinth(); // получить случайный член популяции
     ~Population() = default;
 private:
     static const int max_size = 1048576 * 5;
@@ -28,7 +28,7 @@ private:
     int maxPopulationSize = 2000;
     static const int initialPopulationSize = 50;
     const int maxNumberOfMutations = 20;
-    std::set<PopulationMember> population;
+    std::multiset<PopulationMember> population;
     int populationSize;
 };
 template<class PopulationMember>
@@ -46,7 +46,7 @@ int Population<PopulationMember>::getPopulationSize() {
     return populationSize;
 }
 template<class PopulationMember>
-std::set<PopulationMember>::iterator Population<PopulationMember>::getRandomLabyrinth() {
+std::multiset<PopulationMember>::iterator Population<PopulationMember>::getRandomLabyrinth() {
         logger->info("Entrypoint| Population::getRandomLabyrinth");
         auto it = population.begin();
         Generator generator;
@@ -57,8 +57,8 @@ std::set<PopulationMember>::iterator Population<PopulationMember>::getRandomLaby
 }
 template<class PopulationMember>
 void Population<PopulationMember>::mutate() {
-    logger->info("Entrypoint| Population::mutate");
-    // поменять
+    logger->info("Entrypoint| Population::mutate\n");
+   // std::cout<<"Entrypoint| Population::mutate\n";
     Generator generator;
     int numberOfMutations = generator.getRandomInt(1,maxNumberOfMutations);
     for (int i =0;i<numberOfMutations;i++) {
@@ -67,19 +67,20 @@ void Population<PopulationMember>::mutate() {
         newLabyrinth.mutation();
         population.insert(newLabyrinth);
     }
-    logger->info("End| Population::mutate");
+    logger->info("End| Population::mutate\n");
 }
 template<class PopulationMember>
 void Population<PopulationMember>::shrinkPopulation() {
-    logger->info("Entrypoint| Population::shrinkPopulation");
+    logger->info("Entrypoint| Population::shrinkPopulation\n");
     while(population.size() > maxPopulationSize) {
         population.erase(population.begin());
     }
-    logger->info("End| Population::shrinkPopulation");
+    logger->info("End| Population::shrinkPopulation\n");
 }
 template<class PopulationMember>
 PopulationMember Population<PopulationMember>::getBestLabyrinth() const {
-    logger->info("Entrypoint| Population::getBestLabyrinth");
+    logger->info("Entrypoint| Population::getBestLabyrinth\n");
+  //  std::cout<<"Entrypoint| Population::getBestLabyrinth\n";
     auto labyrinth = population.rbegin();
     logger->info("End| Population::getBestLabyrinth");
     return *labyrinth;
@@ -105,7 +106,8 @@ void Population<PopulationMember>::setMaxPopulationSize(int _populationSize) {
 }
 template<class PopulationMember>
 void Population<PopulationMember>::refreshGeneration() {
-    logger->info("Entrypoint| Population::refreshGeneration");
+    logger->info("Entrypoint| Population::refreshGeneration\n");
+   // std::cout<<"Entrypoint| Population::refreshGeneration\n";
     Generator generator;
     int iterations = generator.getRandomInt(1, population.size());
     while (iterations--) {
