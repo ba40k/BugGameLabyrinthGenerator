@@ -358,18 +358,37 @@ void Labyrinth::xorMask(int startX, int startY, std::vector<std::vector<char> > 
             }
         }
     }
+    logger->info("End| Labyrinth::xorMask()\n");
+}
+std::vector<std::vector<char> > Labyrinth::getMask(int leftUpX, int leftUpY, int height, int width) const {
+    logger->info("Entrypoint| Labyrinth::getMask(int leftUpX, int leftUpY, int height, int width) const\n");
+    std::vector<std::vector<char> > mask(height, std::vector<char>(width));
+    for (int i = leftUpY; i < leftUpY + height; i++) {
+        for (int j = leftUpX; j < leftUpX + width; j++) {
+            mask[i][j] = getCell(j,i);
+        }
+    }
+    logger->info("End| Labyrinth::getMask()\n");
 }
 
 Labyrinth Labyrinth::getDescendant(const Labyrinth &partner) const{
     logger->info("EntryPoint| Labyrinth::getDescendant()\n");
     Generator generator;
     Labyrinth descendant;
-    generator.getRandomBool()==1?descendant=*this:descendant=partner;
+    bool isDominateGenome = generator.getRandomBool();
+    isDominateGenome?descendant=*this:descendant=partner;
     int numberOfMutations = generator.getRandomInt(0,maxNumberOfMutations);
     for (int i =0;i<numberOfMutations;i++) {
         int maskHeight = generator.getRandomInt(1,maxMutationMaskHeight);
         int maskWidth = generator.getRandomInt(1,maxMutationMaskWidth);
-        std::vector<std::vector<char>> mask
+        std::vector<std::vector<char>> mask;
+        auto maskApply = generator.getRandomPoint(LABYRINTH_WIDTH - maskWidth,LABYRINTH_HEIGHT - maskHeight);
+        if (isDominateGenome) {
+            mask = partner.getMask(maskApply.first,maskApply.second,maskHeight,maskWidth);
+        } else {
+            mask = getMask(maskApply.first,maskApply.second,maskHeight,maskWidth);
+        }
+        descendant.xorMask(maskApply.first,maskApply.second,mask);
     }
     logger->info("End| Labyrinth::getDescendant()\n");
     return descendant;
@@ -382,8 +401,11 @@ bool Labyrinth::operator<(const Labyrinth &other) const {
 void Labyrinth::mutation() {
     logger->info("EntryPoint| Labyrinth::mutation()\n");
     Generator generator;
-    auto point = generator.getRandomPoint(LABYRINTH_WIDTH-1,LABYRINTH_HEIGHT-1);
-    (getCell(point.first,point.second)=='.')?setCell(point.first,point.second,'#'):setCell(point.first,point.second,'.');
+    int maskHeight = generator.getRandomInt(1,maxMutationMaskHeight);
+    int maskWidth = generator.getRandomInt(1,maxMutationMaskWidth);
+    std::vector<std::vector<char>> mask = generator.getRandomMask(maskHeight,maskWidth);
+    auto maskApply = generator.getRandomPoint(LABYRINTH_WIDTH - maskWidth,LABYRINTH_HEIGHT - maskHeight);
+    xorMask(maskApply.first,maskApply.second,mask);
     logger->info("End| Labyrinth::mutation()\n");
 }
 

@@ -31,6 +31,7 @@ public:
     [[nodiscard]] char getCell(int x, int y) const; // получить то, что хранится в клетке
     [[nodiscard]] char getWallSymbol() const; // узнать символ стены
     [[nodiscard]] char getFloorSymbol() const; // узнать символ пола
+    std::vector<std::vector<char>> getMask(int leftUpX, int leftUpY, int height, int width) const;
     void mutation();
     ~Labyrinth() = default;
 private:
@@ -51,7 +52,7 @@ private:
     const char floorSymbol = '.';
     const int acceptableScore = 1e5; // достаточный для меня счет
     const int inf = 1e9;
-    const int maxNumberOfMutations = 10;
+    const int maxNumberOfMutations = 3;
     const int maxMutationMaskHeight = 5;
     const int maxMutationMaskWidth = 5;
 };
